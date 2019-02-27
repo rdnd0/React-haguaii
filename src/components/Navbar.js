@@ -12,7 +12,8 @@ class Navbar extends Component {
         <p onClick={logout}>Logout</p>
       </div>
     } else {
-      return <div>
+      return <div className="container">
+      <h1>Please Sign in to proceed</h1>
         <Link to='/login'>Login</Link>
         <Link to='/signup'>Signup</Link>
       </div>
