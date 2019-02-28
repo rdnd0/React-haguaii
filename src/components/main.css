@@ -103,7 +103,6 @@ margin-top: 0.9rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
-  height: calc(100vh - 85px);
 }
 
 .illustration-img {
@@ -121,6 +120,11 @@ margin-top: 0.9rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.theshirt{
+  height: 100vh;
+
 }
 
 /* -- footer -- */

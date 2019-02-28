@@ -8,9 +8,9 @@ export default class Main extends Component {
 
   state = {
     illustrations: [],
-    isLoading: true
+    isLoading: true,
+    allData: []
   }
-
   componentDidMount(){
     this.getIllustrations();
   }
@@ -18,33 +18,32 @@ export default class Main extends Component {
   getIllustrations = () => {
     Api.getIllustrations()
       .then((data) => {
-        let components = {}
-        let arr = []
+        let components = {};
+        let arr = [];
+        let allData = data;
+    
+        
         data.forEach((object) => {
           object.components.forEach((item) => {
             components[item.short_name] = item.image
           })
         })
         Object.keys(components).forEach(function(key) {
-          // console.log(key, obj[key]);
           arr.push({
             short_name: key,
             image: components[key]
           })
         });
-        console.log(arr);
         this.setState({
           illustrations: arr,
           isLoading: false,
+          allData
         })
-        // console.log('in state ',this.state.illustrations)
       })
       .catch((error) => {
         console.log('ya got an error: ', error);
       })
-
   }
-
 
   render() {
     return (
@@ -60,7 +59,7 @@ export default class Main extends Component {
             <a href="#configurator"><button className="main-btn">Configure Your Shirt</button></a>
           </div>
         </header>
-        <Configurator illustrations={this.state.illustrations}/>
+        <Configurator illustrations={this.state.illustrations} allData={this.state.allData}/>
       </div>
     )
   }
