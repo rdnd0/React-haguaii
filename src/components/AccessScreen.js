@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuth } from '../components/AuthProvider';
+import { withAuth } from './AuthProvider';
 
-class Navbar extends Component {
+class AccessScreen extends Component {
   render() {
     const { isLogged, user, logout } = this.props;
     const { username } = user;
@@ -22,4 +22,4 @@ class Navbar extends Component {
   }
 }
 
-export default withAuth(Navbar);
+export default withAuth(AccessScreen);
