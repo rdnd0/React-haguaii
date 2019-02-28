@@ -46,6 +46,7 @@ nav button {
   font-size: 1.2rem;
   letter-spacing: 1px;
   outline:none;
+  border: #f12711 2px solid;
 
 }
 
@@ -95,12 +96,37 @@ margin-top: 0.9rem;
   cursor: pointer;
 }
 
+/* -- configurator -- */
+
 #configurator{
   height: calc(100vh - 68.6px);
   overflow: hidden;
   display: flex;
   justify-content: center;
   height: calc(100vh - 85px);
+}
 
+.illustration-img {
+  height: 10rem;
+}
 
+.cards{
+  display: flex;
+  flex-direction: row;
+}
+
+.card-detail{
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* -- footer -- */
+
+.arrow-up{
+  position: absolute;
+  top: calc(185vh - 2rem);
+  right: 2rem;
 }
