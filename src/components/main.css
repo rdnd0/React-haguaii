@@ -127,10 +127,19 @@ margin-top: 0.9rem;
 
 }
 
+.choose{
+  display: flex;
+  flex-direction: row;
+}
+
 /* -- footer -- */
 
 .arrow-up{
   position: absolute;
-  top: calc(185vh - 2rem);
+  top: calc(185vh - 3rem);
   right: 2rem;
+}
+
+.arrow-up img{
+  height: 4rem;
 }

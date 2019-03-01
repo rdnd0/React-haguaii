@@ -47,8 +47,7 @@ export default class Main extends Component {
 
   render() {
     return (
-      <div className='main'>
-        <a name="top"></a>
+      <div id="top" className='main'>
         <Nav />
         <header>
           <div className="main-content">
