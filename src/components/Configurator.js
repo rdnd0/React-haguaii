@@ -9,6 +9,7 @@ export default class Configurator extends Component {
     outOfRange: false,
     shirtURL: "",
     elementSelected: [],
+    purchase:false,
   }
 
   handleIllustrations = () => {
@@ -38,7 +39,7 @@ export default class Configurator extends Component {
 
     let shirtPath;
     let waitForElement;
-    let {elements, shirtName} = this.state
+    let {elements} = this.state
     let newElements;
     
     if (elements > 0 ) {
@@ -112,8 +113,24 @@ export default class Configurator extends Component {
     
     return (shirtPending ?  
       illustrations[0] && this.handleIllustrations() :
-        <img src={shirtURL} alt="your-shirt" className="theshirt"/>)
+        <div className="shirt">
+          <img src={shirtURL} alt="your-shirt" className="theshirt"/>
+          <div className="shirtDetails">
+            <p>100% persian silky cotton</p>
+            <input type="text" value="M"/>
+            <p>Highly reliable product</p>          
+            <button className="purchase-btn" onClick={() => {this.purchase()}}>BUY!</button>
+          </div>
+        </div>)
 
+  }
+
+  purchase = () => {
+    this.setState({purchase: true})
+  }
+
+  purchasePrint() {
+    return(<h1>Purchase</h1>)
   }
 
   clearShirt = () => {
@@ -124,15 +141,16 @@ export default class Configurator extends Component {
       outOfRange: false,
       elements: 0,
       shirtURL: "",
-      elementSelected: []
+      elementSelected: [],
+      purchase: false,
 })
   }
   
   render() {
-    const {elementsChosen} = this.state;
+    const {elementsChosen, purchase} = this.state;
     return (
       <div id='configurator'>
-        {!elementsChosen ? this.printChosingElements() : this.printIllustrations() }
+        {!elementsChosen ? this.printChosingElements() : !purchase ? this.printIllustrations() : this.purchasePrint() }
         <div>
           <a href="#top" className="arrow-up" onClick={this.clearShirt}>
             <img src="/images/arrow-up.png" alt="arrow-up"/>

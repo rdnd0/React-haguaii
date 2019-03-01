@@ -122,14 +122,58 @@ margin-top: 0.9rem;
   justify-content: center;
 }
 
-.theshirt{
-  height: 100vh;
-
-}
 
 .choose{
   display: flex;
   flex-direction: row;
+}
+
+/* -- shirt -- */
+
+.shirt{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.shirtDetails{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.theshirt{
+  height: 100vh;
+  transition: all 0.5s ease-out;
+  -webkit-transition: height 1s;
+}
+
+.theshirt:hover{
+  height: 105vh;
+  -webkit-transition: height 0.5s;
+}
+
+.purchase-btn{
+  background: #f12711;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  border-radius: 15px;
+  padding: 1rem 1.7rem;
+  font-size: 1.5rem;
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  border: none;
+  transition: all 0.5s ease-out;
+  margin: auto;
+  outline:none;
+  margin-top: 0.9rem;
+}
+
+.purchase-btn:hover{
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
+  cursor: pointer;
 }
 
 /* -- footer -- */
