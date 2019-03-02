@@ -13,15 +13,38 @@ export default class Configurator extends Component {
   }
 
   printCards = () => {
-    const {illustrations, allData} = this.props;
-    const {elements} = this.state;
-    console.log('allData in configurator func, ',allData);
-    let elmentsLeft = elements + 1
+    const {illustrations} = this.props;
+    const {elements, elementSelected} = this.state;
+    let leftIllustrations = [...illustrations];
+    console.log('illustrations in configurator func, ',illustrations);
+    console.log('element selected is: ', elementSelected);
+    let elmentsLeft = elements + 1;
+    
+    const removeByAttr = (arr, attr, value) => {
+      let i = arr.length;
+      while(i--){
+        if ( arr[i] 
+          && arr[i].hasOwnProperty(attr) 
+          && arr[i][attr] === value ) { 
+            arr.splice(i,1);
+          }
+        }
+        return arr;
+      }
+      
+      removeByAttr(leftIllustrations, "short_name", elementSelected[0]);
+      elementSelected.length === 2 && removeByAttr(leftIllustrations, "short_name", elementSelected[1]);
+
+      
+      
+
+
+      console.log('left illustrations in configurator ', leftIllustrations)
 
     return <div className="cards">
             {elements === 0 ? <h3>Choose the element</h3> :
                               <h3>{elmentsLeft} elements left to go!</h3>}
-            {illustrations.map((item, index) => {
+            {leftIllustrations.map((item, index) => {
               return (
                 <div className="card-detail" key={`${item.short_name}+${index}`} onClick={() => {
                   this.handleChosen(item.short_name);
