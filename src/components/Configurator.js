@@ -55,6 +55,9 @@ export default class Configurator extends Component {
               )
               })
             }  
+            <button className="goRight">Right</button>
+            <button className="goLeft">Left</button>
+
         </div>
   }
 
@@ -87,21 +90,46 @@ export default class Configurator extends Component {
 
   addElements = (sign) => {
     let elementsAdded = 0;
+    let {elements} = this.state;
+    let newElements;
     
-    if ((this.state.elements<3 && sign === 'plus') || (this.state.elements>0 && sign === 'minus')) {
+    if ((elements<3 && sign === 'plus') || (elements>0 && sign === 'minus')) {
       if (this.state.outOfRange === false) {
         sign === 'minus' ? (elementsAdded = -1) : (elementsAdded = 1);
-        const newElements = this.state.elements + elementsAdded;
+        newElements = elements + elementsAdded;
   
         this.setState(()=> ({
           elements: newElements,
           
           }));
+        } else {
+          if (sign === 'minus' && elements>1 ) {
+            elementsAdded = -1
+            newElements = elements + elementsAdded;
+
+            this.setState(()=> ({
+              elements: newElements,
+              outOfRange: false
+              
+              }));
+
+          }
+
+          else if (sign === 'plus' && elements<1 ) {
+            elementsAdded = +1
+            newElements = elements + elementsAdded;
+
+            this.setState(()=> ({
+              elements: newElements,
+              outOfRange: false
+              
+              }));
+          }
         }
-      } else {
-      this.setState({
-        outOfRange : true,
-      })
+    } else {
+    this.setState({
+      outOfRange : true,
+    })
     }
   }
 
@@ -119,9 +147,10 @@ export default class Configurator extends Component {
     return(
       <div>
         <div className="choose">
+          <button onClick={()=>{this.addElements('minus')}}>-</button>
           <button onClick={()=>{this.addElements('plus')}}>+</button>
             {outOfRange ? elements === 0 ? (<h3>Add some elements c'mon</h3>) : (<h3>That would be enough, {elements} it is</h3>) : (<h3>{elements}</h3>)}  
-          <button onClick={()=>{this.addElements('minus')}}>-</button>
+
           <button onClick={this.clearShirt}>Back</button>
         </div>
         <div className="element-confirm">
