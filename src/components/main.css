@@ -112,6 +112,12 @@ margin-top: 0.9rem;
 .cards{
   display: flex;
   flex-direction: row;
+  animation: elementin 1.3s ease-in-out 0s backwards;
+}
+
+@keyframes elementin{
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 
 .card-detail{
@@ -135,6 +141,12 @@ margin-top: 0.9rem;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  animation: shirtin 1.3s ease-in-out 0s backwards;
+}
+
+@keyframes shirtin{
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 
 .shirtDetails{
@@ -149,10 +161,10 @@ margin-top: 0.9rem;
   -webkit-transition: height 1s;
 }
 
-.theshirt:hover{
+/* .theshirt:hover{
   height: 105vh;
   -webkit-transition: height 0.5s;
-}
+} */
 
 .purchase-btn{
   background: #f12711;  /* fallback for old browsers */
@@ -174,6 +186,19 @@ margin-top: 0.9rem;
 .purchase-btn:hover{
   box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
   cursor: pointer;
+}
+
+/* -- purchase screen -- */
+
+.purchase{
+  display: flex;
+  flex-direction: row;
+  animation: purchasein 1.3s ease-in-out 0s backwards;
+}
+
+@keyframes purchasein{
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 
 /* -- footer -- */

@@ -12,23 +12,26 @@ export default class Configurator extends Component {
     purchase:false,
   }
 
-  handleIllustrations = () => {
+  printCards = () => {
     const {illustrations, allData} = this.props;
     const {elements} = this.state;
     console.log('allData in configurator func, ',allData);
+    let elmentsLeft = elements + 1
 
     return <div className="cards">
-          {illustrations.map((item, index) => {
-            return (
-              <div className="card-detail" key={`${item.short_name}+${index}`} onClick={() => {
-                this.handleChosen(item.short_name);
-              }}>
-                <p>{item.short_name}</p>
-                <img src={`${item.image}`} alt='illustration' className='illustration-img'/>
-              </div>
-            )
-            })
-          }  
+            {elements === 0 ? <h3>Choose the element</h3> :
+                              <h3>{elmentsLeft} elements left to go!</h3>}
+            {illustrations.map((item, index) => {
+              return (
+                <div className="card-detail" key={`${item.short_name}+${index}`} onClick={() => {
+                  this.handleChosen(item.short_name);
+                }}>
+                  <p>{item.short_name}</p>
+                  <img src={`${item.image}`} alt='illustration' className='illustration-img'/>
+                </div>
+              )
+              })
+            }  
         </div>
   }
 
@@ -49,7 +52,6 @@ export default class Configurator extends Component {
     } else {
       waitForElement = false;
       shirtPath = `http://localhost:5000/images/shirt-${selected.join('')}.png`
-      console.log('shirt path is: ',shirtPath);
     }
       
     this.setState({
@@ -89,8 +91,8 @@ export default class Configurator extends Component {
     
   }
 
-  printChosingElements = () => {
-    const {chosenShirt, shirtPending, elements, outOfRange, elementsChosen} = this.state;
+  printDecideNumberOfElements = () => {
+    const {elements, outOfRange} = this.state;
     return(
       <div>
         <div className="choose">
@@ -109,10 +111,9 @@ export default class Configurator extends Component {
   printIllustrations = () => {
     const {illustrations} = this.props;
     const {shirtURL, shirtPending} = this.state;
-    console.log(shirtURL);
     
     return (shirtPending ?  
-      illustrations[0] && this.handleIllustrations() :
+      illustrations[0] && this.printCards() :
         <div className="shirt">
           <img src={shirtURL} alt="your-shirt" className="theshirt"/>
           <div className="shirtDetails">
@@ -129,13 +130,15 @@ export default class Configurator extends Component {
     this.setState({purchase: true})
   }
 
-  purchasePrint() {
-    return(<h1>Purchase</h1>)
+  printPurchase() {
+    return(
+      <div className="purchase">
+        <h1>Purchase</h1>
+      </div>)
   }
 
   clearShirt = () => {
     return this.setState({
-      chosenShirt: '',
       shirtPending: true,
       elementsChosen: false,
       outOfRange: false,
@@ -150,7 +153,7 @@ export default class Configurator extends Component {
     const {elementsChosen, purchase} = this.state;
     return (
       <div id='configurator'>
-        {!elementsChosen ? this.printChosingElements() : !purchase ? this.printIllustrations() : this.purchasePrint() }
+        {!elementsChosen ? this.printDecideNumberOfElements() : !purchase ? this.printIllustrations() : this.printPurchase() }
         <div>
           <a href="#top" className="arrow-up" onClick={this.clearShirt}>
             <img src="/images/arrow-up.png" alt="arrow-up"/>
