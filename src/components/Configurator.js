@@ -42,7 +42,7 @@ export default class Configurator extends Component {
       console.log('left illustrations in configurator ', leftIllustrations)
 
     return <div className="cards">
-            {elements === 0 ? <h3>Choose the element</h3> :
+            {elements === 0 ? <h3>Choose an element</h3> :
                               <h3>{elmentsLeft} elements left to go!</h3>}
             {leftIllustrations.map((item, index) => {
               return (
