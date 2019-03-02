@@ -37,7 +37,17 @@ nav img {
   height: 2rem;
 }
 
-nav button {
+nav img:hover{
+  height: 2.1rem;
+}
+
+.donate-btn{
+  width: 113px;
+  height: 38px;
+
+}
+
+.donate-link button {
   border-radius: 10px;
   background-color: white;
   padding: 0.3rem 2rem;
@@ -47,8 +57,33 @@ nav button {
   letter-spacing: 1px;
   outline:none;
   border: #f12711 2px solid;
+  text-align: center;
 
 }
+
+
+.donate-btn:hover{
+  font-size: 0;
+}
+
+.donate-btn:hover:after{
+  content: "$$$";
+  font-family: 'Montserrat Alternates', sans-serif;
+  font-size: 1rem;
+}
+
+.donate-link button:hover{
+  background: #f12711;  
+  background: -webkit-linear-gradient(to right, #f5af19, #f12711);  
+  background: linear-gradient(to right, #f5af19, #f12711); 
+  color: white;
+  border: none;
+}
+
+
+
+
+
 
 header {
   height: calc(100vh - 68.6px);
@@ -75,9 +110,9 @@ header p {
 }
 
 .main-btn{
-  background: #f12711;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #f12711;  
+background: -webkit-linear-gradient(to right, #f5af19, #f12711);  
+background: linear-gradient(to right, #f5af19, #f12711); 
 color: white;
 border-radius: 15px;
 padding: 1rem 1.7rem;
