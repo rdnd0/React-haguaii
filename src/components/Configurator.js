@@ -10,12 +10,14 @@ export default class Configurator extends Component {
     shirtURL: "",
     elementSelected: [],
     purchase:false,
+    currentCard: 0,
   }
 
   printCards = () => {
     const {illustrations} = this.props;
-    const {elements, elementSelected} = this.state;
+    const {elements, elementSelected, currentCard} = this.state;
     let leftIllustrations = [...illustrations];
+    let newIndex = currentCard;
     console.log('illustrations in configurator func, ',illustrations);
     console.log('element selected is: ', elementSelected);
     let elmentsLeft = elements + 1;
@@ -30,35 +32,50 @@ export default class Configurator extends Component {
           }
         }
         return arr;
-      }
-      
+      }  
       removeByAttr(leftIllustrations, "short_name", elementSelected[0]);
       elementSelected.length === 2 && removeByAttr(leftIllustrations, "short_name", elementSelected[1]);
 
+    const nextCard = (direction) => {
+      direction === 'right' ? 
+      newIndex+1 < illustrations.length ? console.log('clicked right', newIndex+=1, illustrations[newIndex]) : console.log('out of bounds')
       
-      
+      : newIndex-1 >= 0 ? console.log('clicked left ', newIndex-=1, illustrations[newIndex]) : console.log('out of bounds')
+
+      this.setState({
+        currentCard: newIndex
+      })
 
 
-      console.log('left illustrations in configurator ', leftIllustrations)
+    }
 
-    return <div className="cards">
-            {elements === 0 ? <h3>Choose an element</h3> :
-                              <h3>{elmentsLeft} elements left to go!</h3>}
-            {leftIllustrations.map((item, index) => {
-              return (
-                <div className="card-detail" key={`${item.short_name}+${index}`} onClick={() => {
-                  this.handleChosen(item.short_name);
-                }}>
-                  <p>{item.short_name}</p>
-                  <img src={`${item.image}`} alt='illustration' className='illustration-img'/>
-                </div>
-              )
+    return (
+      <div className="cards">
+        {elements === 0 ? <h3>Choose an element</h3> :
+                          <h3>{elmentsLeft} elements left to go!</h3>}
+          <div className={`cards-slider active-slide-${currentCard}`}>
+            {console.log('currentcard within card:',currentCard)}
+            <div className="cards-slider-wrapper" style={{'transform': `translateX(-${currentCard*(100/leftIllustrations.length)}%)`
+            }}>
+              {leftIllustrations.map((item, index) => {
+                return (
+                  <div id={`card-${currentCard}`} className="card" key={`${item.short_name}+${currentCard}`} onClick={() => {
+                    this.handleChosen(item.short_name);
+                    }}>
+                    <p>{item.short_name}</p>
+                    <img src={`${item.image}`} alt='illustration' className='illustration-img'/>
+                  </div>
+                )   
               })
-            }  
-            <button className="goRight">Right</button>
-            <button className="goLeft">Left</button>
+              }  
+          </div>
+      </div>
 
-        </div>
+            <button className="goRight"
+            onClick={() => {nextCard('right')}}>Right</button>
+            <button className="goLeft" onClick={() => {nextCard('left')}}>Left</button>
+
+        </div>)
   }
 
   handleChosen = (itemname) => {
