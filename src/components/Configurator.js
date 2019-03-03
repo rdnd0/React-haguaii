@@ -52,12 +52,8 @@ export default class Configurator extends Component {
     return (
       <div className="cards-app">
         <div className="cards-tittle">
-          {elements === 0 ? <h3>Choose an element</h3> :
-                            <h3>{elmentsLeft} elements left to go!</h3>}
-        </div>
-        <div className="cards-btns">
-          <button className="goLeft" onClick={() => {nextCard('left')}}>Left</button>
-          <button className="goRight" onClick={() => {nextCard('right')}}>Right</button>     
+          {elements === 0 ? <h1>Choose an element</h1> :
+                            <h1>{elmentsLeft} elements left to go!</h1>}
         </div>
         <div className="cards">
             <div className={`cards-slider active-slide-${currentCard}`}>
@@ -79,6 +75,10 @@ export default class Configurator extends Component {
             </div>
         </div>
         </div> 
+        <div className="cards-btns">
+          <button className="goLeft" onClick={() => {nextCard('left')}}>Left</button>
+          <button className="goRight" onClick={() => {nextCard('right')}}>Right</button>     
+        </div>
       </div>)
   }
 
