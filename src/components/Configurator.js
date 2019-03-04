@@ -26,10 +26,10 @@ class Configurator extends Component {
       shirtPending: false,
       elementsChosen: true,
       outOfRange: false,
-      shirtURL: localStorage.getItem(shirtURL),
+      shirtURL: localStorage.getItem('shirtURL'),
       purchase:true,
       currentCard: 0,
-      shirtSize: localStorage.getItem(shirtSize),
+      shirtSize: localStorage.getItem('shirtSize'),
       secondLoad: true,
 
     })
