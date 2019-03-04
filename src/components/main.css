@@ -324,17 +324,59 @@ margin-top: 0.9rem;
   cursor: pointer;
 }
 
+.back-btn{
+  background: darkslategrey;
+  color: white;
+  border-radius: 15px;
+  padding: 1rem 1.7rem;
+  font-size: 1.2rem;
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  border: none;
+  transition: all 0.5s ease-out;
+  margin: auto;
+  outline:none;
+  margin-top: 0.9rem;
+}
+
+.back-btn:hover{
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
+  cursor: pointer;
+}
+
+.purchase-btn:hover{
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
+  cursor: pointer;
+}
+
+
+
 /* -- purchase screen -- */
+
+.purchase-screen{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
 
 .purchase{
   display: flex;
   flex-direction: row;
   animation: purchasein 1.3s ease-in-out 0s backwards;
+  justify-content: center;
+  align-content: baseline;
+  height: 80vh;
+  width: 100vw;
 }
 
 @keyframes purchasein{
   from{opacity: 0;}
   to{opacity: 1;}
+}
+
+.purchase-shirt{
+  height:100%;
 }
 
 /* -- footer -- */

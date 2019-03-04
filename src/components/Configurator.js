@@ -17,23 +17,20 @@ class Configurator extends Component {
     purchase:false,
     currentCard: 0,
     shirtSize: "",
-    secondLoad: false,
   }
 
   componentDidMount() {
-    this.state.secondLoad && 
-    this.setState({
-      shirtPending: false,
-      elementsChosen: true,
-      outOfRange: false,
-      shirtURL: localStorage.getItem('shirtURL'),
-      purchase:true,
-      currentCard: 0,
-      shirtSize: localStorage.getItem('shirtSize'),
-      secondLoad: true,
-
-    })
-    
+    if (localStorage.getItem('shirtURL')) {
+      this.setState({
+        shirtPending: false,
+        elementsChosen: true,
+        outOfRange: false,
+        shirtURL: localStorage.getItem('shirtURL'),
+        purchase:true,
+        currentCard: 0,
+        shirtSize: localStorage.getItem('shirtSize'),      
+      })
+    }
   }
 
   printCards = () => {
@@ -223,27 +220,35 @@ class Configurator extends Component {
             <p>100% persian silky cotton</p>
             <ChooseSize onChange={this.handleSize} />
             <p>Highly reliable product</p>          
-            <button className="purchase-btn" onClick={() => {this.purchase()}}>BUY!</button>
+            <button className="purchase-btn" onClick={() => {this.toCheckOut()}}>To checkout!</button>
+            <button className="back-btn" onClick={() => {this.clearShirt()}}>Back</button>
           </div>
         </div>)
 
   }
 
-
+  toCheckOut = () => {
+    this.setState({purchase: true})
+  }
 
   purchase = () => {
-    this.setState({purchase: true, secondLoad:true})
+    console.log('confirm purchase');
   }
 
   printPurchase() {
-    for (let key in this.state) {
-      localStorage.setItem(key, JSON.stringify(this.state[key]));
-    }
+    localStorage.setItem('shirtURL', this.state.shirtURL);
+    localStorage.setItem('shirtSize', this.state.shirtSize);
+
+
     if (this.props.isLogged) {
       return(
-        <div className="purchase">
-          <h1>Purchase</h1>
-          <img src={this.state.shirtURL} alt="shirt"/>
+        <div className="purchase-screen">
+            <h1>Purchase</h1>
+          <div className="purchase">
+            <img src={this.state.shirtURL} alt="shirt" className="purchase-shirt"/>
+            <button className="purchase-btn" onClick={() => {this.purchase()}}>Buy!</button>
+            <button className="back-btn" onClick={() => {this.clearShirt()}}>Back</button>
+          </div>)
         </div>)
     } else {
       this.props.history.push('/signup');
