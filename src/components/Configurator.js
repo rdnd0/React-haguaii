@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import ChooseSize from './ChooseSize';
+import { withAuth } from '../components/AuthProvider';
+import { withRouter } from 'react-router-dom';
 
-export default class Configurator extends Component {
+class Configurator extends Component {
 
   state = {
     shirtPending: true,
@@ -11,7 +14,7 @@ export default class Configurator extends Component {
     elementSelected: [],
     purchase:false,
     currentCard: 0,
-    shirtSize: null
+    shirtSize: ""
   }
 
   printCards = () => {
@@ -182,27 +185,24 @@ export default class Configurator extends Component {
     )
   }
   
+  handleSize = (size) => {
+
+    this.setState({
+      shirtSize: size.value,
+    })
+  }
+  
   printShirt = () => {
     const {illustrations} = this.props;
-    const {shirtURL, shirtPending} = this.state;
-
-    const handleSize = (e) => {
-
-      this.setState({
-        shirtSize: e.target.value,
-      })
-    }
+    const {shirtURL, shirtPending, shirtSize} = this.state;
     
-
-
     return (shirtPending ?  
       illustrations[0] && this.printCards() :
         <div className="shirt">
           <img src={shirtURL} alt="your-shirt" className="theshirt"/>
           <div className="shirtDetails">
             <p>100% persian silky cotton</p>
-            <input type="text" placeholder="select your size" onChange={handleSize()
-            }/>
+            <ChooseSize onChange={this.handleSize} />
             <p>Highly reliable product</p>          
             <button className="purchase-btn" onClick={() => {this.purchase()}}>BUY!</button>
           </div>
@@ -213,14 +213,21 @@ export default class Configurator extends Component {
 
 
   purchase = () => {
+
     this.setState({purchase: true})
   }
 
   printPurchase() {
-    return(
-      <div className="purchase">
-        <h1>Purchase</h1>
-      </div>)
+    console.log(this.props.isLogged);
+    
+    if (this.props.isLogged) {
+      return(
+        <div className="purchase">
+          <h1>Purchase</h1>
+        </div>)
+    } else {
+      this.props.history.push('/signup');
+    }
   }
 
   clearShirt = () => {
@@ -241,7 +248,7 @@ export default class Configurator extends Component {
     return (
       <div id='configurator'>
         {!elementsChosen ? 
-          this.printDecideNumberOfElements() : !purchase ? this.printShirt() : this.printPurchase() }
+          this.printDecideNumberOfElements() : !purchase ? this.printShirt() : this.state.shirtSize ? this.printPurchase() : this.printShirt() }
         <div>
           <a href="#top" className="arrow-up" onClick={this.clearShirt}>
             <img src="/images/arrow-up.png" alt="arrow-up"/>
@@ -251,3 +258,5 @@ export default class Configurator extends Component {
     )
   }
 }
+
+export default withRouter(withAuth(Configurator));
