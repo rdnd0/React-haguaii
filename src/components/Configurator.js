@@ -11,6 +11,7 @@ export default class Configurator extends Component {
     elementSelected: [],
     purchase:false,
     currentCard: 0,
+    shirtSize: null
   }
 
   printCards = () => {
@@ -98,7 +99,7 @@ export default class Configurator extends Component {
 
     } else {
       waitForElement = false;
-      shirtPath = `http://localhost:5000/images/shirt-${selected.join('')}.png`
+      shirtPath = `http://localhost:5000/images/shirt-${selected.sort().join('')}.png`
     }
       
     this.setState({
@@ -181,23 +182,35 @@ export default class Configurator extends Component {
     )
   }
   
-  printIllustrations = () => {
+  printShirt = () => {
     const {illustrations} = this.props;
     const {shirtURL, shirtPending} = this.state;
+
+    const handleSize = (e) => {
+
+      this.setState({
+        shirtSize: e.target.value,
+      })
+    }
     
+
+
     return (shirtPending ?  
       illustrations[0] && this.printCards() :
         <div className="shirt">
           <img src={shirtURL} alt="your-shirt" className="theshirt"/>
           <div className="shirtDetails">
             <p>100% persian silky cotton</p>
-            <input type="text" value="M"/>
+            <input type="text" placeholder="select your size" onChange={handleSize()
+            }/>
             <p>Highly reliable product</p>          
             <button className="purchase-btn" onClick={() => {this.purchase()}}>BUY!</button>
           </div>
         </div>)
 
   }
+
+
 
   purchase = () => {
     this.setState({purchase: true})
@@ -227,7 +240,8 @@ export default class Configurator extends Component {
     const {elementsChosen, purchase} = this.state;
     return (
       <div id='configurator'>
-        {!elementsChosen ? this.printDecideNumberOfElements() : !purchase ? this.printIllustrations() : this.printPurchase() }
+        {!elementsChosen ? 
+          this.printDecideNumberOfElements() : !purchase ? this.printShirt() : this.printPurchase() }
         <div>
           <a href="#top" className="arrow-up" onClick={this.clearShirt}>
             <img src="/images/arrow-up.png" alt="arrow-up"/>
