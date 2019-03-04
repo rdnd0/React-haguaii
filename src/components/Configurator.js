@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 
 class Configurator extends Component {
 
+
+
   state = {
     shirtPending: true,
     elements: 0,
@@ -14,7 +16,24 @@ class Configurator extends Component {
     elementSelected: [],
     purchase:false,
     currentCard: 0,
-    shirtSize: ""
+    shirtSize: "",
+    secondLoad: false,
+  }
+
+  componentDidMount() {
+    this.state.secondLoad && 
+    this.setState({
+      shirtPending: false,
+      elementsChosen: true,
+      outOfRange: false,
+      shirtURL: localStorage.getItem(shirtURL),
+      purchase:true,
+      currentCard: 0,
+      shirtSize: localStorage.getItem(shirtSize),
+      secondLoad: true,
+
+    })
+    
   }
 
   printCards = () => {
@@ -213,17 +232,18 @@ class Configurator extends Component {
 
 
   purchase = () => {
-
-    this.setState({purchase: true})
+    this.setState({purchase: true, secondLoad:true})
   }
 
   printPurchase() {
-    console.log(this.props.isLogged);
-    
+    for (let key in this.state) {
+      localStorage.setItem(key, JSON.stringify(this.state[key]));
+    }
     if (this.props.isLogged) {
       return(
         <div className="purchase">
           <h1>Purchase</h1>
+          <img src={this.state.shirtURL} alt="shirt"/>
         </div>)
     } else {
       this.props.history.push('/signup');
@@ -240,7 +260,8 @@ class Configurator extends Component {
       elementSelected: [],
       purchase: false,
       currentCard: 0,
-})
+      shirtSize: ""
+    })
   }
   
   render() {

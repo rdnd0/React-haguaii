@@ -17,10 +17,10 @@ class App extends Component {
       <AuthProvider>
           {/* <AccessScreen path='/purchase' data='data' /> */}
           <Switch>
-            <Route exact path="/" component={Main}  />
-            <AnonRoute path="/signup" component={Signup} />
-            <AnonRoute path="/login" component={Login} />
-            <PrivateRoute path="/private" component={Private} />
+            <PrivateRoute exact path="/private" component={Private} />
+            <AnonRoute exact path="/login" component={Login} />
+            <AnonRoute exact path="/signup" component={Signup} />
+            <Route path="/" component={Main}  />
           </Switch>
       </AuthProvider>
     )

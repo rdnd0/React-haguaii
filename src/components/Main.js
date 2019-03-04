@@ -9,7 +9,8 @@ export default class Main extends Component {
   state = {
     illustrations: [],
     isLoading: true,
-    allData: []
+    allData: [],
+    oldData: this.props.location.state
   }
   componentDidMount(){
     this.getIllustrations();

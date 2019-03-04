@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { withAuth } from '../components/AuthProvider';
 
 class Signup extends Component {
@@ -20,6 +20,21 @@ class Signup extends Component {
             username: "",
             password: "",
         });
+        this.props.history.push({
+          pathname: '/#configurator',
+          state: { 
+            shirtPending: false,
+            elements: 0,
+            elementsChosen: true,
+            outOfRange: false,
+            shirtURL: "http://localhost:5000/images/shirt-brocoliflamingo.png",
+            elementSelected: [],
+            purchase:true,
+            currentCard: 0,
+            shirtSize: "M"
+          
+          }
+        })
       })
       .catch( error => console.log(error) )
   }
@@ -33,6 +48,7 @@ class Signup extends Component {
     const { username, password } = this.state;
     return (
       <div>
+        <h1>please create an account to proceed</h1>
         <form onSubmit={this.handleFormSubmit}>
           <label>Username:</label>
           <input type="text" name="username" value={username} onChange={this.handleChange}/>
@@ -50,4 +66,4 @@ class Signup extends Component {
   }
 }
 
-export default withAuth(Signup);
+export default withRouter(withAuth(Signup));

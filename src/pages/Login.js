@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withAuth } from '../components/AuthProvider';
+
 class Login extends Component {
   state = {
     username: "",
@@ -12,7 +13,6 @@ class Login extends Component {
 
     this.props.login({ username, password })
       .then(() => {
-        this.props.history.push('/private')
       })
       .catch( error => console.log(error) )
   }
