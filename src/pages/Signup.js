@@ -20,21 +20,6 @@ class Signup extends Component {
             username: "",
             password: "",
         });
-        this.props.history.push({
-          pathname: '/#configurator',
-          state: { 
-            shirtPending: false,
-            elements: 0,
-            elementsChosen: true,
-            outOfRange: false,
-            shirtURL: "http://localhost:5000/images/shirt-brocoliflamingo.png",
-            elementSelected: [],
-            purchase:true,
-            currentCard: 0,
-            shirtSize: "M"
-          
-          }
-        })
       })
       .catch( error => console.log(error) )
   }

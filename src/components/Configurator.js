@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ChooseSize from './ChooseSize';
 import { withAuth } from '../components/AuthProvider';
 import { withRouter } from 'react-router-dom';
+import NumberOfElements from '../components/configurator/NumberOfElements'
 import Api from '../lib/shirts-service';
 
 
@@ -40,8 +41,6 @@ class Configurator extends Component {
     const {elements, elementSelected, currentCard} = this.state;
     let leftIllustrations = [...illustrations];
     let newIndex = currentCard;
-    console.log('illustrations in configurator func, ',illustrations);
-    console.log('element selected is: ', elementSelected);
     let elmentsLeft = elements + 1;
     
     const removeByAttr = (arr, attr, value) => {
@@ -177,30 +176,16 @@ class Configurator extends Component {
   }
 
   confirmElements = () => {
-    let elements = this.state.elements - 1
-    this.setState({
-      elementsChosen: true,
-      elements
-    })
-    
-  }
+    if (this.state.elements !== 0) {
+      let elements = this.state.elements - 1
+      this.setState({
+        elementsChosen: true,
+        elements
+      })
 
-  printDecideNumberOfElements = () => {
-    const {elements, outOfRange} = this.state;
-    return(
-      <div>
-        <div className="choose">
-          <button onClick={()=>{this.addElements('minus')}}>-</button>
-          <button onClick={()=>{this.addElements('plus')}}>+</button>
-            {outOfRange ? elements === 0 ? (<h3>Add some elements c'mon</h3>) : (<h3>That would be enough, {elements} it is</h3>) : (<h3>{elements}</h3>)}  
+    } else { 
 
-          <button onClick={this.clearShirt}>Back</button>
-        </div>
-        <div className="element-confirm">
-          <button onClick={()=>{this.confirmElements()}}>OK!</button>
-        </div>
-      </div>
-    )
+    }
   }
   
   handleSize = (size) => {
@@ -267,7 +252,7 @@ class Configurator extends Component {
   }
 
   clearShirt = () => {
-    return this.setState({
+    this.setState({
       shirtPending: true,
       elementsChosen: false,
       outOfRange: false,
@@ -279,13 +264,14 @@ class Configurator extends Component {
       shirtSize: ""
     })
   }
+
   
   render() {
     const {elementsChosen, purchase} = this.state;
     return (
       <div id='configurator'>
         {!elementsChosen ? 
-          this.printDecideNumberOfElements() : !purchase ? this.printShirt() : this.state.shirtSize ? this.printPurchase() : this.printShirt() }
+          <NumberOfElements state={this.state} clearShirt={this.clearShirt} addElements={this.addElements}confirmElements={this.confirmElements}/> : !purchase ? this.printShirt() : this.state.shirtSize ? this.printPurchase() : this.printShirt() }
         <div>
           <a href="#top" className="arrow-up" onClick={this.clearShirt}>
             <img src="/images/arrow-up.png" alt="arrow-up"/>
