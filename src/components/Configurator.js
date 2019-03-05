@@ -120,7 +120,7 @@ class Configurator extends Component {
 
     } else {
       waitForElement = false;
-      shirtPath = `http://localhost:5000/images/shirt-${selected.sort().join('')}.png`
+      shirtPath = `${process.env.REACT_APP_BASE_URL}/images/shirt-${selected.sort().join('')}.png`
     }
       
     this.setState({
