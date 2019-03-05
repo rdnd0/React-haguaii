@@ -241,7 +241,7 @@ class Configurator extends Component {
     console.log('confirm purchase', shirtURL );
         Api.createShirt({ user, shirtURL, shirtSize })
       .then((result) => {
-        this.props.history.push(`/`);
+        this.props.history.push(`/Private`);
       })
       .catch((error) => {console.log(error)})
   }
