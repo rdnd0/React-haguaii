@@ -11,6 +11,10 @@ class Api {
     return this.api.get('/illustrations')
       .then(({data}) => data);
   }
+
+  createShirt(body) {
+    return this.api.post('/shirt', body);
+  }
 }
 
 

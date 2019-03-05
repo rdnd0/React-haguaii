@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ChooseSize from './ChooseSize';
 import { withAuth } from '../components/AuthProvider';
 import { withRouter } from 'react-router-dom';
+import Api from '../lib/shirts-service';
+
 
 class Configurator extends Component {
 
@@ -210,7 +212,7 @@ class Configurator extends Component {
   
   printShirt = () => {
     const {illustrations} = this.props;
-    const {shirtURL, shirtPending, shirtSize} = this.state;
+    const {shirtURL, shirtPending} = this.state;
     
     return (shirtPending ?  
       illustrations[0] && this.printCards() :
@@ -231,8 +233,17 @@ class Configurator extends Component {
     this.setState({purchase: true})
   }
 
-  purchase = () => {
-    console.log('confirm purchase');
+  purchase = (e) => {
+    e.preventDefault();
+    const { shirtURL, shirtSize } = this.state; 
+    const user = this.props.user._id;
+
+    console.log('confirm purchase', shirtURL );
+        Api.createShirt({ user, shirtURL, shirtSize })
+      .then((result) => {
+        this.props.history.push(`/`);
+      })
+      .catch((error) => {console.log(error)})
   }
 
   printPurchase() {
@@ -246,9 +257,9 @@ class Configurator extends Component {
             <h1>Purchase</h1>
           <div className="purchase">
             <img src={this.state.shirtURL} alt="shirt" className="purchase-shirt"/>
-            <button className="purchase-btn" onClick={() => {this.purchase()}}>Buy!</button>
+            <button className="purchase-btn" onClick={this.purchase}>Buy!</button>
             <button className="back-btn" onClick={() => {this.clearShirt()}}>Back</button>
-          </div>)
+          </div>
         </div>)
     } else {
       this.props.history.push('/signup');
