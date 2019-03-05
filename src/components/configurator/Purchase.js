@@ -1,15 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
- function YourShirt(props) {
+ function Purchase(props) {
 
   
   return (
-    <div>shirts</div>
+    <div>purchase</div>
 
   )
 }
 
-export default YourShirt;
-
-
+export default Purchase;

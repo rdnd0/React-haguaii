@@ -20,6 +20,10 @@ h1,h2,h3,h4,h5{
   font-family: 'Amatic SC', cursive;
 }
 
+h3{
+  font-size: 1.8rem;
+}
+
 a{
   text-decoration: none;
 }
@@ -144,11 +148,43 @@ margin-top: 0.9rem;
   height: 10rem;
 }
 
-
-
 .choose{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* -- number of elements -- */
+.elements-section{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  width: 100vh;
+  height: 80vh;
+}
+
+.addremove-btn{
+  background-color: white;
+  border: #f12711 1px solid;
+  font-size: 1.5rem;
+  font-style: bold;
+  border-radius: 100%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.addremove-btn:last-child{
+  margin-right:0;
+}
+
+.element-confirm{
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }
 
 /* -- card slider -- */
