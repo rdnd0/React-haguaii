@@ -218,7 +218,7 @@ margin-top: 0.9rem;
 
 .cards-slider.active-slide-0 #card-0 {
   opacity: 1;
-  transform: scale(1.2);
+  transform: scale(1);
   background-color: #f3f3f3;
   border-color: #f3f3f3; }
 
