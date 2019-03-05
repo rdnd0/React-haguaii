@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ChooseSize from './ChooseSize';
+import ChooseSize from './configurator/ChooseSize';
 import { withAuth } from '../components/AuthProvider';
 import { withRouter } from 'react-router-dom';
 import NumberOfElements from '../components/configurator/NumberOfElements'
@@ -14,7 +14,8 @@ class Configurator extends Component {
   state = {
     stage: 0,
     elements: 0,
-    shirtURL:""
+    shirtURL:"",
+    shirtSize:""
   }
 
   handleIncrement = () => {
@@ -47,10 +48,11 @@ class Configurator extends Component {
   }
 
   //Shirts
-
-
-
-
+  passSize = (size) => {
+    this.setState({
+      shirtSize: size,
+    })
+  }
 
   renderSelected = () => {
     let {stage} = this.state;
@@ -60,7 +62,7 @@ class Configurator extends Component {
       case 1:
         return <Cards numberOfElements={this.state.elements}moveStage={this.handleIncrement} passShirtURL={this.passShirtURL}/>
       case 2:
-        return <YourShirt/>
+        return <YourShirt sendShirtURL={this.state.shirtURL} moveStage={this.handleIncrement} restart={this.restart} passSize={this.passSize}/>
       case 3:
         return <Purchase/>
       default:
@@ -70,7 +72,10 @@ class Configurator extends Component {
 
   restart = () => {
     this.setState({
-      stage: 0
+      stage: 0,
+      elements: 0,
+      shirtURL:"",
+      shirtSize:""
     })
   }
   

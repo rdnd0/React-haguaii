@@ -59,7 +59,7 @@ class Cards extends Component {
 
     } else {
       shirtPath = `${process.env.REACT_APP_BASE_URL}/images/shirt-${selected.sort().join('')}.png`;
-      this.props.passShirtURL(this.state.shirtURL);
+      this.props.passShirtURL(shirtPath);
       this.props.moveStage();
     }
       
