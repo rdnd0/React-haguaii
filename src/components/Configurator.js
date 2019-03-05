@@ -14,6 +14,7 @@ class Configurator extends Component {
   state = {
     stage: 0,
     elements: 0,
+    shirtURL:""
   }
 
   handleIncrement = () => {
@@ -30,13 +31,25 @@ class Configurator extends Component {
     })
   }
 
-  //Cards
+  //Elements selector
 
   passNumberOfElements = (elements) => {
     this.setState({
       elements
     })
   }
+
+  //Cards
+  passShirtURL = (shirt) => {
+    this.setState({
+      shirtURL: shirt,
+    })
+  }
+
+  //Shirts
+
+
+
 
 
   renderSelected = () => {
@@ -45,7 +58,7 @@ class Configurator extends Component {
       case 0:
         return <NumberOfElements moveStage={this.handleIncrement} passNumberOfElements={this.passNumberOfElements}/>
       case 1:
-        return <Cards numberOfElements={this.state.elements}moveStage={this.handleIncrement}/>
+        return <Cards numberOfElements={this.state.elements}moveStage={this.handleIncrement} passShirtURL={this.passShirtURL}/>
       case 2:
         return <YourShirt/>
       case 3:

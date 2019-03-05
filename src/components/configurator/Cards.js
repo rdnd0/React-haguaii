@@ -9,6 +9,8 @@ class Cards extends Component {
     allData: [],
     elementsSelected: [],
     currentCard: 0,
+    elements: this.props.numberOfElements - 1,
+    shirtURL: "",
   }
   componentDidMount(){
     this.getIllustrations();
@@ -43,12 +45,36 @@ class Cards extends Component {
       })
   }
 
+  handleChosen = (itemname) => {
+    const selected = [...this.state.elementsSelected];
+
+    selected.push(itemname);
+
+    let shirtPath;
+    let {elements} = this.state
+    let newElements;
+    
+    if (elements > 0 ) {
+      newElements = elements - 1;
+
+    } else {
+      shirtPath = `${process.env.REACT_APP_BASE_URL}/images/shirt-${selected.sort().join('')}.png`;
+      this.props.passShirtURL(this.state.shirtURL);
+      this.props.moveStage();
+    }
+      
+    this.setState({
+      elements: newElements,
+      shirtURL: shirtPath,
+      elementsSelected: selected,
+    })
+  }
+
   printCards = () => {
-    const {numberOfElements} = this.props;
-    const {elementsSelected, currentCard, illustrations} = this.state;
+    const {elementsSelected, currentCard, illustrations, elements} = this.state;
     let leftIllustrations = [...illustrations];
     let newIndex = currentCard;
-    let elementsLeft = numberOfElements;
+    let elementsLeft = elements;
     const removeByAttr = (arr, attr, value) => {
       let i = arr.length;
       while(i--){
@@ -80,7 +106,7 @@ class Cards extends Component {
         <div className="cards-app">
           <div className="cards-tittle">
             {elementsSelected === 0 ? <h1>Choose an element</h1> :
-                              <h1>{elementsLeft} elements left to go!</h1>}
+                              <h1>{elementsLeft+1} element/s left to go!</h1>}
           </div>
           <div className="cards">
               <div className={`cards-slider active-slide-${currentCard}`}>
@@ -109,6 +135,8 @@ class Cards extends Component {
         </div>
     )
   }
+
+  
 
   render() {
     return (

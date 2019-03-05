@@ -31,6 +31,10 @@ class NumberOfElements extends Component {
   submitElementNumber = () => {
     this.props.moveStage();
     this.props.passNumberOfElements(this.state.elements);
+    let elements = this.state.elements -1;
+    this.setState({
+      elements,
+    })
   }
 
 

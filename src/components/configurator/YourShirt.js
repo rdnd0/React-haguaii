@@ -1,14 +1,15 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react'
 
- function YourShirt(props) {
-
-  
-  return (
-    <div>shirts</div>
-
-  )
+class YourShirt extends Component {
+  render() {
+    return (
+      <div>
+        shirts
+      </div>
+    )
+  }
 }
+
 
 export default YourShirt;
 
