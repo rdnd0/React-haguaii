@@ -120,7 +120,7 @@ class Cards extends Component {
                         this.handleChosen(item.short_name);
                         }}>
                         <p>{item.short_name}</p>
-                        <img src={`${item.image}`} alt='illustration' className='illustration-img'/>
+                        <img src={`${process.env.REACT_APP_BASE_URL}/images/${item.short_name}.png`} alt='illustration' className='illustration-img'/>
                       </div>
                     )   
                   })

@@ -104,12 +104,6 @@ class Configurator extends Component {
         <div>
           {this.renderSelected()}
         </div>
-        {/* <div>
-          <button onClick={this.handleIncrement} disabled={stage === 3}>more</button>
-        </div>
-        <div>
-          <button onClick={this.handleDecrement} disabled={stage === 0}>less</button>
-        </div> */}
         <div>
           <a href="#top" className="arrow-up" onClick={this.restart}>
             <img src="/images/arrow-up.png" alt="arrow-up"/></a>
