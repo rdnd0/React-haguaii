@@ -45,6 +45,33 @@ nav img:hover{
   height: 2.1rem;
 }
 
+.login-btn{
+  background: #f12711;
+  color: white;
+  border-radius: 15px;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  border: none;
+  outline:none;
+  margin-right: 0.3rem;
+}
+
+.logout-btn{
+  background: darkslategrey;
+  color: white;
+  border-radius: 15px;
+  padding: 0.5rem 2rem;
+  font-size: 1.2rem;
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  border: none;
+  outline:none;
+  margin-right: 0.3rem;
+}
+
+
 .donate-btn{
   width: 113px;
   height: 38px;

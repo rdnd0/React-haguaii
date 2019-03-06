@@ -22,9 +22,17 @@ class Configurator extends Component {
         stage:3,
         shirtURL: localStorage.getItem('shirtURL'),
         shirtSize: localStorage.getItem('shirtSize'),      
+      }, () => {
+        localStorage.removeItem('shirtURL');
+        localStorage.removeItem('shirtSize');
       })
     }
   }
+
+  componentWillUnmount = () => {
+    
+  }
+  
 
   handleIncrement = () => {
     const { stage } = this.state
@@ -102,7 +110,6 @@ class Configurator extends Component {
         <div>
           <button onClick={this.handleDecrement} disabled={stage === 0}>less</button>
         </div> */}
-        <button onClick={this.props.logout}>Logout</button>
         <div>
           <a href="#top" className="arrow-up" onClick={this.restart}>
             <img src="/images/arrow-up.png" alt="arrow-up"/></a>

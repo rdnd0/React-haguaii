@@ -15,6 +15,8 @@ class Purchase extends Component {
     Api.createShirt({ user, shirtURL, shirtSize })
     .then((result) => {
       console.log('shirt created')
+      localStorage.removeItem('shirtURL');
+      localStorage.removeItem('shirtSize');
       this.setState({
         redirect: true,
       })
@@ -45,6 +47,7 @@ class Purchase extends Component {
       return <Redirect to={{ 
         pathname: '/signup', 
       }} />
+      
     }
 
   }

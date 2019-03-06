@@ -11,7 +11,7 @@ const AnonRoute = ({ component: Component, isLogged, ...rest }) => {
           return <Component {...props} />
         } else {
           return <Redirect to={{ 
-            pathname: '#configurator', 
+            pathname: '/', 
             state: {
               from: props.location 
             } 

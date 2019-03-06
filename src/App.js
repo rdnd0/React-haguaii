@@ -12,15 +12,21 @@ import Main from './components/Main';
 
 
 class App extends Component {
+
+  componentWillUnmount = () => {
+    
+  }
+  
+
   render() {
     return (
       <AuthProvider>
           {/* <AccessScreen path='/purchase' data='data' /> */}
           <Switch>
+            <Route exact path="/" component={Main}  />
             <PrivateRoute exact path="/private" component={Private} />
             <AnonRoute exact path="/login" component={Login} />
             <AnonRoute exact path="/signup" component={Signup} />
-            <Route path="/" component={Main}  />
           </Switch>
       </AuthProvider>
     )
