@@ -35,7 +35,6 @@ class Signup extends Component {
     return (
       <div>
         <Nav/>
-        <h1>please create an account to proceed</h1>
         <form className="form" onSubmit={this.handleFormSubmit}>
           <label className="label-form">Username:</label>
           <input className="input-form" type="text" name="username" value={username} onChange={this.handleChange}/>
