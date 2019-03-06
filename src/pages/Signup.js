@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { withAuth } from '../components/AuthProvider';
+import Nav from '../components/Nav';
 
 class Signup extends Component {
 
@@ -33,13 +34,14 @@ class Signup extends Component {
     const { username, password } = this.state;
     return (
       <div>
+        <Nav/>
         <h1>please create an account to proceed</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input type="text" name="username" value={username} onChange={this.handleChange}/>
-          <label>Password:</label>
-          <input type="password" name="password" value={password} onChange={this.handleChange} />
-          <input type="submit" value="Signup" />
+        <form className="form" onSubmit={this.handleFormSubmit}>
+          <label className="label-form">Username:</label>
+          <input className="input-form" type="text" name="username" value={username} onChange={this.handleChange}/>
+          <label className="label-form">Password:</label>
+          <input className="input-form" type="password" name="password" value={password} onChange={this.handleChange} />
+          <input className="btn-form" type="submit" value="Signup" />
         </form>
 
         <p>Already have account? 

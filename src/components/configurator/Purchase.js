@@ -1,13 +1,68 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import Api from '../../lib/shirts-service';
+import { withAuth } from '../../components/AuthProvider';
 
- function Purchase(props) {
+class Purchase extends Component {
+  state = {
+    redirect: false,
+  }
 
-  
-  return (
-    <div>purchase</div>
+  purchase = () => {
+    const {shirtURL, shirtSize} = this.props;
+    const user = this.props.user._id;
 
-  )
+    Api.createShirt({ user, shirtURL, shirtSize })
+    .then((result) => {
+      console.log('shirt created')
+      this.setState({
+        redirect: true,
+      })
+    })
+    .catch((error) => {console.log(error)})
+  }
+
+  printPurchaseScreen = () => {
+    localStorage.setItem('shirtURL', this.props.shirtURL);
+    localStorage.setItem('shirtSize', this.props.shirtSize);
+    const {shirtURL, shirtSize} = this.props;
+    const user = this.props.user._id;
+
+    if (user) {
+      return(
+        <div className="purchase-screen">
+            <h1>Shopping cart</h1>
+          <div className="purchase">
+            <img src={shirtURL} alt="shirt" className="purchase-shirt"/>
+            <div className="purchase-details">
+              <h3>{ `Your size: ${shirtSize}` }</h3>
+              <button className="purchase-btn" onClick={this.purchase}>Buy!</button>
+              <button className="back-btn" onClick={this.props.restart}>Back</button>
+            </div>
+          </div>
+        </div>)
+    } else {
+      return <Redirect to={{ 
+        pathname: '/signup', 
+      }} />
+    }
+
+  }
+  render() {
+    if(this.state.redirect) {
+      return(
+        <Redirect to={{ 
+          pathname: '/Private', 
+        }} />
+      )
+    }
+    return (
+      <div>
+        {this.printPurchaseScreen()}
+      </div>
+    )
+  }
 }
 
-export default Purchase;
+
+export default withAuth(Purchase);

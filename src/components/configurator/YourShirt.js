@@ -14,22 +14,24 @@ class YourShirt extends Component {
   }
 
   toCheckOut = () => {
-    this.props.passSize(this.state.shirtSize);
-    this.props.moveStage();
+    if(this.state.shirtSize !== "") {
+      this.props.passSize(this.state.shirtSize);
+      this.props.moveStage();
+    }
   }
 
   printShirt = () => {
     let {sendShirtURL} = this.props
-    console.log('shirtURL: ', sendShirtURL);
 
     return (
         <div className="shirt">
           <img src={sendShirtURL} alt="your-shirt" className="theshirt"/>
           <div className="shirtDetails">
-            <p>100% persian silky cotton</p>
+            <p>100% silky persian cotton</p>
+            {this.state.shirtSize === '' && <h4>choose your size</h4>}
             <ChooseSize onChange={this.handleSize} />
             <p>Highly reliable product</p>          
-            <button className="purchase-btn" onClick={() => {this.toCheckOut()}}>To checkout!</button>
+            <button className="purchase-btn" onClick={this.toCheckOut}>To checkout!</button>
             <button className="back-btn" onClick={this.props.restart}>Back</button>
           </div>
         </div>)

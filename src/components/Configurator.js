@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import ChooseSize from './configurator/ChooseSize';
 import { withAuth } from '../components/AuthProvider';
 import { withRouter } from 'react-router-dom';
 import NumberOfElements from '../components/configurator/NumberOfElements'
 import Cards from '../components/configurator/Cards'
 import YourShirt from '../components/configurator/YourShirt'
 import Purchase from '../components/configurator/Purchase'
-import Api from '../lib/shirts-service';
 
 
 class Configurator extends Component {
@@ -16,6 +14,16 @@ class Configurator extends Component {
     elements: 0,
     shirtURL:"",
     shirtSize:""
+  }
+
+  componentDidMount() {
+    if (localStorage.getItem('shirtURL')) {
+      this.setState({
+        stage:3,
+        shirtURL: localStorage.getItem('shirtURL'),
+        shirtSize: localStorage.getItem('shirtSize'),      
+      })
+    }
   }
 
   handleIncrement = () => {
@@ -33,7 +41,6 @@ class Configurator extends Component {
   }
 
   //Elements selector
-
   passNumberOfElements = (elements) => {
     this.setState({
       elements
@@ -54,17 +61,21 @@ class Configurator extends Component {
     })
   }
 
+  //Purchase
+
+
+
   renderSelected = () => {
     let {stage} = this.state;
     switch (stage) {
       case 0:
         return <NumberOfElements moveStage={this.handleIncrement} passNumberOfElements={this.passNumberOfElements}/>
       case 1:
-        return <Cards numberOfElements={this.state.elements}moveStage={this.handleIncrement} passShirtURL={this.passShirtURL}/>
+        return <Cards numberOfElements={this.state.elements} moveStage={this.handleIncrement} passShirtURL={this.passShirtURL}/>
       case 2:
         return <YourShirt sendShirtURL={this.state.shirtURL} moveStage={this.handleIncrement} restart={this.restart} passSize={this.passSize}/>
       case 3:
-        return <Purchase/>
+        return <Purchase shirtURL={this.state.shirtURL} shirtSize={this.state.shirtSize} restart={this.restart}/>
       default:
         return null   
     }
@@ -80,7 +91,6 @@ class Configurator extends Component {
   }
   
   render() {
-    const { stage } = this.state;
     return (
       <div id='configurator'>
         <div>
@@ -92,6 +102,7 @@ class Configurator extends Component {
         <div>
           <button onClick={this.handleDecrement} disabled={stage === 0}>less</button>
         </div> */}
+        <button onClick={this.props.logout}>Logout</button>
         <div>
           <a href="#top" className="arrow-up" onClick={this.restart}>
             <img src="/images/arrow-up.png" alt="arrow-up"/></a>

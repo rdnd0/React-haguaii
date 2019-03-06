@@ -14,8 +14,7 @@ export default class ChooseSize extends Component {
   render() {
     const { onChange } = this.props;
     return (
-      <div>
-        <h4>choose your size</h4>
+      <div className="chooseSize">
         <Select options={options} onChange={onChange} />
       </div>
     )

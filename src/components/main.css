@@ -34,7 +34,7 @@ nav{
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.2rem;
-  background-color: aquamarine;
+  background-color: white;
 }
 
 nav img {
@@ -86,19 +86,81 @@ nav img:hover{
 
 
 
+/* login */
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: calc(100vh - 68.6px);
+  width: 30vw;
+  margin: 0 auto;
+}
+
+.signup{
+  padding-bottom: 6.3rem;
+}
+
+.label-form{
+  margin-bottom: 0.5rem;
+}
+
+.input-form{
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  height:1.5rem;
+  padding-right: 0.3rem;  
+}
+
+.input-form:focus{
+  background-color: #f5af19;
+  outline: none;
+}
+
+.btn-form{
+  background: #f12711;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: white;
+  border-radius: 15px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  font-family: 'Amatic SC', cursive;
+  letter-spacing: 2px;
+  margin-top: 0;
+  border: none;
+  transition: all 0.5s ease-out;
+  outline:none;
+}
+
+.btn-form:hover{
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
+  cursor: pointer;
+}
 
 
+/* header */
 
 header {
   height: calc(100vh - 68.6px);
   overflow: hidden;
   display: flex;
-  justify-content: center;
-  background-image: url('');
+  justify-content: flex-end;
+  background-image: url('/images/background1.png');
   background-repeat: no-repeat;
   background-position: center;
   height: calc(100vh - 85px);
   background-size: cover;
+
+}
+
+.backgroundImages {
+  animation: backgroundimages 3s ease-in-out 2s backwards;
+  transition-duration: 1s;
+}
+@keyframes backgroundimages{
+  from{opacity: 0;}
+  to{opacity: 1;}
 }
 
 header p {
@@ -109,8 +171,12 @@ header p {
 .main-content{
   padding: 20px;
   align-self: center;
-  width: 35vw;
+  width: 25vw;
   padding-bottom: 17vh;
+  margin-top: 4.5rem;
+  margin-left: 2rem;
+  margin-right: 4rem;
+
 }
 
 .main-btn{
@@ -177,6 +243,8 @@ margin-top: 0.9rem;
   margin-right: 1rem;
 }
 
+.addremove-btn:focus { outline: none; }
+
 .addremove-btn:last-child{
   margin-right:0;
 }
@@ -191,7 +259,7 @@ margin-top: 0.9rem;
 
 .cards-app{
   width: 100vw;
-  margin: 0 auto;
+  margin: 7rem auto;
 }
 
 .cards-tittle{
@@ -401,7 +469,7 @@ margin-top: 0.9rem;
   flex-direction: row;
   animation: purchasein 1.3s ease-in-out 0s backwards;
   justify-content: center;
-  align-content: baseline;
+  align-content: center;
   height: 80vh;
   width: 100vw;
 }
@@ -413,6 +481,15 @@ margin-top: 0.9rem;
 
 .purchase-shirt{
   height:100%;
+}
+
+.purchase-details{
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+ justify-content: center;
+ height: 33vh;
+ margin-top: 8rem;
 }
 
 /* -- footer -- */

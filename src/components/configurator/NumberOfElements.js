@@ -51,7 +51,7 @@ class NumberOfElements extends Component {
         </div>
       </div>
       <div className="element-confirm">
-        <button className="purchase-btn" onClick={this.submitElementNumber}>OK!</button>
+        <button className="purchase-btn" onClick={this.submitElementNumber} disabled={this.state.elements === 0}>OK!</button>
       </div>
     </div>
     )
