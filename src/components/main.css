@@ -80,6 +80,9 @@ nav img:hover{
 
 .nav-btns{
   max-height: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .donate-btn{
@@ -131,9 +134,13 @@ nav img:hover{
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  height: calc(100vh - 68.6px);
+  height: calc(100vh - 125px);
   width: 30vw;
   margin: 0 auto;
+}
+
+.account-stuff{
+  margin-left: 2rem;
 }
 
 .signup{

@@ -43,7 +43,7 @@ class Signup extends Component {
           <input className="btn-form" type="submit" value="Signup" />
         </form>
 
-        <p>Already have account? 
+        <p className="account-stuff">Already have account? 
           <Link to={"/login"}> Login</Link>
         </p>
 
