@@ -567,6 +567,29 @@ margin-top: 0.9rem;
  margin-top: 8rem;
 }
 
+/* confirm screen */
+.confirm-screen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  padding-bottom: 17vh;
+  padding-top: 10vh;
+}
+
+.confirm-logos{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.confirm-logos img {
+  margin: 0 4rem;
+}
+
 /* -- footer -- */
 
 .arrow-up{
