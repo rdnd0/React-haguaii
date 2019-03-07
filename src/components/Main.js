@@ -9,10 +9,8 @@ export default class Main extends Component {
   state = {
     illustrations: [],
     isLoading: true,
-    allData: [],
     oldData: this.props.location.state,
   }
-
 
   render() {
     return (

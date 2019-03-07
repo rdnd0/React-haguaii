@@ -13,6 +13,7 @@ class Configurator extends Component {
     stage: 0,
     elements: 0,
     shirtURL:"",
+    shirtURL2:"",
     shirtSize:""
   }
 
@@ -56,9 +57,10 @@ class Configurator extends Component {
   }
 
   //Cards
-  passShirtURL = (shirt) => {
+  passShirtURL = (shirt1, shirt2) => {
     this.setState({
-      shirtURL: shirt,
+      shirtURL: shirt1,
+      shirtURL2: shirt2,
     })
   }
 
@@ -81,7 +83,7 @@ class Configurator extends Component {
       case 1:
         return <Cards numberOfElements={this.state.elements} moveStage={this.handleIncrement} passShirtURL={this.passShirtURL}/>
       case 2:
-        return <YourShirt sendShirtURL={this.state.shirtURL} moveStage={this.handleIncrement} restart={this.restart} passSize={this.passSize}/>
+        return <YourShirt sendShirtURL={this.state.shirtURL} sendShirtURL2={this.state.shirtURL2}moveStage={this.handleIncrement} restart={this.restart} passSize={this.passSize}/>
       case 3:
         return <Purchase shirtURL={this.state.shirtURL} shirtSize={this.state.shirtSize} restart={this.restart}/>
       default:

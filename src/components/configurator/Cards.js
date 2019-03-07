@@ -11,6 +11,7 @@ class Cards extends Component {
     currentCard: 0,
     elements: this.props.numberOfElements - 1,
     shirtURL: "",
+    shirtURL2: ""
   }
   componentDidMount(){
     this.getIllustrations();
@@ -50,7 +51,7 @@ class Cards extends Component {
 
     selected.push(itemname);
 
-    let shirtPath;
+    let shirtPath, shirtPath2;
     let {elements} = this.state
     let newElements;
     
@@ -59,13 +60,15 @@ class Cards extends Component {
 
     } else {
       shirtPath = `${process.env.REACT_APP_BASE_URL}/images/shirt-${selected.sort().join('')}.png`;
-      this.props.passShirtURL(shirtPath);
+      shirtPath2 = `${process.env.REACT_APP_BASE_URL}/images/shirt-${selected.sort().join('')}2.png`;
+      this.props.passShirtURL(shirtPath, shirtPath2);
       this.props.moveStage();
     }
       
     this.setState({
       elements: newElements,
       shirtURL: shirtPath,
+      shirtURL2: shirtPath2,
       elementsSelected: selected,
     })
   }
