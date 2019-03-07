@@ -246,6 +246,7 @@ margin-top: 0.9rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-width: 250px;
 }
 
 /* -- number of elements -- */
@@ -253,9 +254,9 @@ margin-top: 0.9rem;
   display: flex;
   justify-content: center;
   align-content: center;
-  flex-direction: column;
-  width: 100vh;
-  height: 80vh;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
 }
 
 .addremove-btn{
@@ -299,6 +300,12 @@ margin-top: 0.9rem;
   justify-content: center;
   margin-top: 1.2rem;
   width: 100%;
+}
+
+.cards-btns  img{
+  height: 2rem;
+  cursor: pointer;
+
 }
 
 .cards{

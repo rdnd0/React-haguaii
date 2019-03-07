@@ -129,8 +129,8 @@ class Cards extends Component {
           </div>
           </div> 
           <div className="cards-btns">
-            <button className="goLeft" onClick={() => {nextCard('left')}}>Left</button>
-            <button className="goRight" onClick={() => {nextCard('right')}}>Right</button>     
+            <img className="goLeft" onClick={() => {nextCard('left')}} src="/images/arrow-left.png" alt="left-arrow"/>
+            <img className="goRight" onClick={() => {nextCard('right')}}src="/images/arrow-right.png" alt="right-arrow"/>    
           </div>
         </div>
     )
