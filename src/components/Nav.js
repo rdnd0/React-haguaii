@@ -9,7 +9,7 @@ class Nav extends Component {
     return (
       <nav>
         <a href="/"><img src="images/haguaii.png" alt="logo"/></a>
-        <div>
+        <div className="nav-btns">
           {isLogged ? <button onClick={logout} className="logout-btn">Logout</button> 
           : <Link to='/login'className="login-btn">Login</Link>}
 

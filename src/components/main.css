@@ -37,6 +37,11 @@ nav{
   background-color: white;
 }
 
+nav .down{
+  box-shadow: 0 5px 7px 0 rgba(0, 0, 0, 0.50);
+
+}
+
 nav img {
   height: 2rem;
 }
@@ -46,7 +51,9 @@ nav img:hover{
 }
 
 .login-btn{
-  background: #f12711;
+  background: #f12711;  
+  background: -webkit-linear-gradient(to right, #f5af19, #f12711);  
+  background: linear-gradient(to right, #f5af19, #f12711); 
   color: white;
   border-radius: 15px;
   padding: 0.5rem 2rem;
@@ -71,10 +78,14 @@ nav img:hover{
   margin-right: 0.3rem;
 }
 
+.nav-btns{
+  max-height: 41px;
+}
 
 .donate-btn{
   width: 113px;
-  height: 38px;
+  min-height: 41px;
+
 
 }
 
@@ -89,6 +100,7 @@ nav img:hover{
   outline:none;
   border: #f12711 2px solid;
   text-align: center;
+  max-height: 41px
 
 }
 
