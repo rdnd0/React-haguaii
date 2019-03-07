@@ -38,6 +38,7 @@ class Purchase extends Component {
             <img src={shirtURL} alt="shirt" className="purchase-shirt"/>
             <div className="purchase-details">
               <h3>{ `Your size: ${shirtSize}` }</h3>
+              <h3>Price: 75€</h3>
               <button className="purchase-btn" onClick={this.purchase}>Buy!</button>
               <button className="back-btn" onClick={this.props.restart}>Back</button>
             </div>
