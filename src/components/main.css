@@ -558,13 +558,17 @@ margin-top: 0.9rem;
   height:100%;
 }
 
+.price-tag{
+  margin-top: -1rem;
+}
+
 .purchase-details{
- display: flex;
- flex-direction: column;
- align-content: center;
- justify-content: center;
- height: 33vh;
- margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  height: 39vh;
+  margin-top: 8rem;
 }
 
 /* confirm screen */
