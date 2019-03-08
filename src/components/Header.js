@@ -9,7 +9,7 @@ export default class Header extends Component {
   componentDidMount() {
     this.interval = setInterval( this.addImage , 3000)
   }
-  componentWillUnmount() {
+  handleClick = () => {
     clearInterval(this.interval)
   }
 
@@ -35,7 +35,11 @@ export default class Header extends Component {
         <p>Tired of wearing the same as everybody else?</p>
         <p>Do not you think it is time to express yourself?</p>
         <p>Let's get started...</p>
-        <a href="#configurator"><button className="main-btn">Configure Your Shirt</button></a>
+        <a href="#configurator">
+        <button 
+          className="main-btn"
+          onClick={this.handleClick}
+        >Configure Your Shirt</button></a>
       </div>
     </header>
     )

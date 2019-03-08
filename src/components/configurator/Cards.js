@@ -95,14 +95,21 @@ class Cards extends Component {
 
 
     const nextCard = (direction) => {
-      direction === 'right' ? 
-      newIndex+1 < illustrations.length ? console.log('clicked right', newIndex+=1,illustrations[newIndex]) : console.log('out of bounds')
-      
-      : newIndex-1 >= 0 ? console.log('clicked left ', newIndex-=1, illustrations[newIndex]) : console.log('out of bounds')
-
-      this.setState({
-        currentCard: newIndex
-      })
+      if(direction === 'right') {
+          return (
+            illustrations[newIndex += 1],
+            this.setState({
+              currentCard: newIndex
+            })
+            )
+        } else {
+          return(
+            illustrations[newIndex -= 1],
+            this.setState({
+              currentCard: newIndex
+            })
+          ) 
+        }
     }
 
     return (
@@ -113,8 +120,6 @@ class Cards extends Component {
           </div>
           <div className="cards">
               <div className={`cards-slider active-slide-${currentCard}`}>
-                {console.log('currentcard within card:',currentCard)}
-  
                 <div className="cards-slider-wrapper" style={{'transform': `translateX(-${currentCard*(100/leftIllustrations.length)}%)`
                 }}>
                   {leftIllustrations.map((item, index) => {
