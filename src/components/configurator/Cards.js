@@ -96,19 +96,23 @@ class Cards extends Component {
 
     const nextCard = (direction) => {
       if(direction === 'right') {
-          return (
-            illustrations[newIndex += 1],
-            this.setState({
-              currentCard: newIndex
-            })
-            )
+          if(newIndex < 3) {
+            return (
+              illustrations[newIndex += 1],
+              this.setState({
+                currentCard: newIndex
+              })
+              )
+          }
         } else {
-          return(
-            illustrations[newIndex -= 1],
-            this.setState({
-              currentCard: newIndex
-            })
-          ) 
+            if(newIndex > 0){
+              return(
+                illustrations[newIndex -= 1],
+                this.setState({
+                  currentCard: newIndex
+                })
+              ) 
+            }
         }
     }
 
