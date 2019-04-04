@@ -1,16 +1,19 @@
-import { GET_ILLUSTRATIONS, INCREASE_STAGE, RESET_STAGE } from "./actions";
+import { DECREASE_STAGE, INCREASE_STAGE, RESET_STAGE } from "./actions";
 
 const initialState = {
-  illustrations: {},
-  illustrationsLoaded: false,
   stage: 0
 };
 
 export default function(state = initialState, action) {
-  const { type, data } = action;
+  const { type } = action;
 
   switch (type) {
     case INCREASE_STAGE:
+      return {
+        ...state,
+        stage: (state.stage += 1)
+      };
+    case DECREASE_STAGE:
       return {
         ...state,
         stage: (state.stage += 1)
@@ -19,11 +22,6 @@ export default function(state = initialState, action) {
       return {
         ...state,
         stage: 0
-      };
-    case GET_ILLUSTRATIONS:
-      return {
-        ...state,
-        illustrations: data
       };
     default:
       return state;

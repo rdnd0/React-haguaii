@@ -3,7 +3,7 @@ import "./main.css";
 import Nav from "./Nav";
 import Header from "./Header";
 import Configurator from "./Configurator";
-import { getIllustrations } from "../redux/actions";
+import { getIllustrations } from "../redux/illustrations/actions";
 
 //redux
 import { connect } from "react-redux";
@@ -33,9 +33,9 @@ class Main extends Component {
 }
 
 const mapStateToProps = state => ({
-  illustrations: state.illustrations,
-  isLoaded: state.illustrationsLoaded,
-  stage: state.stage
+  illustrations: state.illustrations.illustrations,
+  isLoaded: state.illustrations.illustrationsLoaded,
+  stage: state.stage.stage
 });
 
 export default connect(mapStateToProps)(Main);

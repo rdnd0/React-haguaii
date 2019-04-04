@@ -8,7 +8,7 @@ import Login from "./pages/Login";
 import AuthProvider from "./components/AuthProvider";
 import Main from "./components/Main";
 // Redux
-import reducer from "./redux/reducer";
+import rootReducer from "./redux/rootReducer";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -18,7 +18,7 @@ import thunk from "redux-thunk";
 const middleware = [logger, thunk];
 
 const store = createStore(
-  reducer,
+  rootReducer,
   {},
   composeWithDevTools(applyMiddleware(...middleware))
 );
