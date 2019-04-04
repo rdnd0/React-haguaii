@@ -1,62 +1,94 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class NumberOfElements extends Component {
   state = {
     elements: 0,
-    outOfRange: false,
-  }
+    outOfRange: false
+  };
 
   handleIncrement = () => {
     const { elements } = this.state;
-    elements  === 3 ?
-    this.setState({
-      outOfRange:true,
-    }) : this.setState({
-      elements: elements + 1,
-      outOfRange: false
-    })
-  }
+    elements === 3
+      ? this.setState({
+          outOfRange: true
+        })
+      : this.setState({
+          elements: elements + 1,
+          outOfRange: false
+        });
+  };
 
   handleDecrement = () => {
     const { elements } = this.state;
-    elements === 0 ?
-    this.setState({
-      outOfRange:true, 
-    }) : this.setState({
-      elements: elements - 1,
-      outOfRange: false
-    })
-  }
+    elements === 0
+      ? this.setState({
+          outOfRange: true
+        })
+      : this.setState({
+          elements: elements - 1,
+          outOfRange: false
+        });
+  };
 
   submitElementNumber = () => {
     this.props.moveStage();
     this.props.passNumberOfElements(this.state.elements);
-    let elements = this.state.elements -1;
+    let elements = this.state.elements - 1;
     this.setState({
-      elements,
-    })
-  }
+      elements
+    });
+  };
 
+  goRandom = () => {
+    this.props.moveStageR();
+  };
 
   render() {
     return (
-    <div className="elements-section">
-      <img src="/images/whiteshirt.png" alt="whiteshirt" className="theshirt"/>
-      <div className="choose">
-        <div className="plusminus-btn">
-          <button className="addremove-btn" onClick={this.handleDecrement}>-</button>
-          <button className="addremove-btn" onClick={this.handleIncrement}>+</button>
-        </div>
-          {this.state.outOfRange ? this.state.elements === 0 ? (<h3>Add some elements c'mon</h3>) : (<h3>That would be enough, {this.state.elements} it is</h3>) : (<h3>{this.state.elements}</h3>)}  
-        <div>
-          <button className="purchase-btn" onClick={this.submitElementNumber} disabled={this.state.elements === 0}>OK!</button>
+      <div className="elements-section">
+        <img
+          src="/images/whiteshirt.png"
+          alt="whiteshirt"
+          className="theshirt"
+        />
+        <div className="choose">
+          <h3>Choose the number of elements</h3>
+          <div className="plusminus-btn">
+            <button className="addremove-btn" onClick={this.handleDecrement}>
+              -
+            </button>
+            <button className="addremove-btn" onClick={this.handleIncrement}>
+              +
+            </button>
+          </div>
+          {this.state.outOfRange ? (
+            this.state.elements === 0 ? (
+              <h3>Add some elements c'mon</h3>
+            ) : (
+              <h3>That would be enough, {this.state.elements} it is</h3>
+            )
+          ) : (
+            <h3>{this.state.elements}</h3>
+          )}
+          <div>
+            <button
+              className="purchase-btn"
+              onClick={this.submitElementNumber}
+              disabled={this.state.elements === 0}
+            >
+              OK!
+            </button>
+          </div>
+          <h4 style={{ margin: "0", fontSize: "1.3rem" }}>
+            Or...
+            <span className="random-btn" onClick={this.goRandom}>
+              go random!
+            </span>
+          </h4>
         </div>
       </div>
-    </div>
-    )
+    );
   }
 }
 
 export default NumberOfElements;
-
-
