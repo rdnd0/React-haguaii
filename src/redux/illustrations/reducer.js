@@ -12,7 +12,8 @@ export default function(state = initialState, action) {
     case GET_ILLUSTRATIONS:
       return {
         ...state,
-        illustrations: data
+        illustrations: data,
+        illustrationsLoaded: true
       };
     default:
       return state;

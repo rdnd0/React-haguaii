@@ -1,51 +1,57 @@
 import React, { Component } from "react";
 import { withAuth } from "../components/AuthProvider";
 import { withRouter } from "react-router-dom";
+//Redux magic
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { resetStage } from "../redux/stage/actions";
+
+//Components
 import NumberOfElements from "../components/configurator/NumberOfElements";
 import Cards from "../components/configurator/Cards";
 import YourShirt from "../components/configurator/YourShirt";
 import Purchase from "../components/configurator/Purchase";
 
 class Configurator extends Component {
-  state = {
-    stage: 0,
-    elements: 0,
-    shirtURL: "",
-    shirtURL2: "",
-    shirtSize: ""
-  };
+  // state = {
+  //   stage: 0,
+  //   elements: 0,
+  //   shirtURL: "",
+  //   shirtURL2: "",
+  //   shirtSize: ""
+  // };
 
-  componentDidMount() {
-    if (localStorage.getItem("shirtURL")) {
-      this.setState(
-        {
-          stage: 3,
-          shirtURL: localStorage.getItem("shirtURL"),
-          shirtSize: localStorage.getItem("shirtSize")
-        },
-        () => {
-          localStorage.removeItem("shirtURL");
-          localStorage.removeItem("shirtSize");
-        }
-      );
-    }
-  }
+  //will not need it as I will be pulling info from store
+  // componentDidMount() {
+  //   if (localStorage.getItem("shirtURL")) {
+  //     this.setState(
+  //       {
+  //         stage: 3,
+  //         shirtURL: localStorage.getItem("shirtURL"),
+  //         shirtSize: localStorage.getItem("shirtSize")
+  //       },
+  //       () => {
+  //         localStorage.removeItem("shirtURL");
+  //         localStorage.removeItem("shirtSize");
+  //       }
+  //     );
+  //   }
+  // }
+  // store will take care of this with actions
+  // handleIncrement = () => {
+  //   const { stage } = this.state;
+  //   this.setState({
+  //     stage: stage + 1
+  //   });
+  // };
 
-  componentWillUnmount = () => {};
+  // handleDecrement = () => {
+  //   const { stage } = this.state;
+  //   this.setState({
+  //     stage: stage - 1
+  //   });
+  // };
 
-  handleIncrement = () => {
-    const { stage } = this.state;
-    this.setState({
-      stage: stage + 1
-    });
-  };
-
-  handleDecrement = () => {
-    const { stage } = this.state;
-    this.setState({
-      stage: stage - 1
-    });
-  };
   //Random
   handleRandom = () => {
     this.setState({
@@ -87,7 +93,7 @@ class Configurator extends Component {
   //Purchase
 
   renderSelected = () => {
-    let { stage } = this.state;
+    let { stage } = this.props;
     switch (stage) {
       case 0:
         return (
@@ -128,14 +134,14 @@ class Configurator extends Component {
     }
   };
 
-  restart = () => {
-    this.setState({
-      stage: 0,
-      elements: 0,
-      shirtURL: "",
-      shirtSize: ""
-    });
-  };
+  // restart = () => {
+  //   this.setState({
+  //     stage: 0,
+  //     elements: 0,
+  //     shirtURL: "",
+  //     shirtSize: ""
+  //   });
+  // };
 
   render() {
     return (
@@ -151,4 +157,23 @@ class Configurator extends Component {
   }
 }
 
-export default withRouter(withAuth(Configurator));
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      resetStage
+    },
+    dispatch
+  );
+
+const mapStateToProps = state => ({
+  stage: state.stage.stage
+});
+
+export default withRouter(
+  withAuth(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps
+    )(Configurator)
+  )
+);
