@@ -8,18 +8,11 @@ import { chooseShirt, decreaseElements } from "../../redux/shirt/actions";
 
 class Cards extends Component {
   state = {
-    // illustrations: [],
-    // isLoading: true,
-    // allData: [],
     elementsSelected: [],
     currentCard: 0
-    // shirtURL: "",
-    // shirtURL2: ""
   };
   componentDidMount() {
     const { illustrations } = this.props;
-    // this.getIllustrations();
-    console.log(illustrations);
   }
 
   handleChosen = itemname => {

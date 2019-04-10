@@ -10,10 +10,6 @@ import { increaseStage } from "../../redux/stage/actions";
 import { chooseSize } from "../../redux/shirt/actions";
 
 class Purchase extends Component {
-  state = {
-    redirect: false
-  };
-
   purchase = () => {
     const { shirt1, shirtSize } = this.props;
     const user = this.props.user._id;
@@ -63,15 +59,6 @@ class Purchase extends Component {
     }
   };
   render() {
-    if (this.state.redirect) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/Private"
-          }}
-        />
-      );
-    }
     return <div>{this.printPurchaseScreen()}</div>;
   }
 }

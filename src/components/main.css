@@ -270,6 +270,7 @@ header p {
   overflow: hidden;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .illustration-img {
@@ -282,16 +283,25 @@ header p {
   justify-content: center;
   align-items: center;
   min-width: 250px;
+  margin-bottom: 5vh;
+}
+
+.plusminus-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 /* -- number of elements -- */
 .elements-section {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   flex-direction: row;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 68.6px);
+  margin-right: 10vw;
 }
 
 .addremove-btn {
@@ -303,7 +313,7 @@ header p {
   width: 2rem;
   height: 2rem;
   cursor: pointer;
-  margin-right: 1rem;
+  margin: 0.5rem;
 }
 
 .addremove-btn:focus {
@@ -334,6 +344,7 @@ header p {
 .cards-app {
   width: 100vw;
   margin: 7rem auto;
+  height: calc(100vh - 68.6px);
 }
 
 .cards-tittle {

@@ -49,16 +49,19 @@ class NumberOfElements extends Component {
           className="theshirt"
         />
         <div className="choose">
-          <h3>Choose the number of elements</h3>
+          <h3 style={{ marginBottom: "1rem" }}>
+            Choose the number of elements
+          </h3>
           <div className="plusminus-btn">
             <button className="addremove-btn" onClick={this.handleDecrement}>
               -
             </button>
+            {<h3>{elements}</h3>}
             <button className="addremove-btn" onClick={this.handleIncrement}>
               +
             </button>
           </div>
-          {<h3>{elements}</h3>}
+
           <div>
             <button
               className="purchase-btn"
