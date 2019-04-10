@@ -2,7 +2,7 @@ export const GET_ILLUSTRATIONS = "GET_ILLUSTRATIONS";
 
 export function getIllustrations() {
   return async function(dispatch) {
-    const res = await fetch(`${process.env.REACT_APP_BASE_URL}illustrations`);
+    const res = await fetch(`${process.env.REACT_APP_BASE_URL}/illustrations`);
     const data = await res.json();
 
     let components = {};
