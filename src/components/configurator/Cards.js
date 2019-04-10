@@ -17,19 +17,25 @@ class Cards extends Component {
     // shirtURL2: ""
   };
   componentDidMount() {
-    this.getIllustrations();
+    const { illustrations } = this.props;
+    // this.getIllustrations();
+    console.log(illustrations);
   }
 
   handleChosen = itemname => {
-    const { chooseShirt } = this.props;
     const selected = [...this.state.elementsSelected];
 
     selected.push(itemname);
 
     let shirtPath, shirtPath2;
-    let { elements, decreaseElements, increaseStage } = this.props;
+    const {
+      elements,
+      decreaseElements,
+      increaseStage,
+      chooseShirt
+    } = this.props;
 
-    if (elements > 0) {
+    if (elements > 1) {
       decreaseElements();
     } else {
       shirtPath = `${
@@ -38,9 +44,8 @@ class Cards extends Component {
       shirtPath2 = `${
         process.env.REACT_APP_BASE_URL
       }/images/shirt-${selected.sort().join("")}2.png`;
-      this.props.passShirtURL(shirtPath, shirtPath2);
-      increaseStage();
       chooseShirt(shirtPath, shirtPath2);
+      increaseStage();
     }
     this.setState({
       elementsSelected: selected
@@ -48,15 +53,10 @@ class Cards extends Component {
   };
 
   printCards = () => {
-    const {
-      elementsSelected,
-      currentCard,
-      illustrations,
-      elements
-    } = this.state;
+    const { elementsSelected, currentCard } = this.state;
+    const { illustrations, elements } = this.props;
     let leftIllustrations = [...illustrations];
     let newIndex = currentCard;
-    let elementsLeft = elements;
     const removeByAttr = (arr, attr, value) => {
       let i = arr.length;
       while (i--) {
@@ -95,7 +95,7 @@ class Cards extends Component {
           {elementsSelected === 0 ? (
             <h1>Choose an element</h1>
           ) : (
-            <h1>{elementsLeft + 1} element/s left to go!</h1>
+            <h1>{elements} element/s left to go!</h1>
           )}
         </div>
         <div className="cards">
@@ -171,7 +171,8 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = state => ({
-  elements: state.shirt.elements
+  elements: state.shirt.elements,
+  illustrations: state.illustrations.illustrations
 });
 
 export default connect(

@@ -24,9 +24,10 @@ export function chooseShirt(path1, path2) {
   };
 }
 
-export function chooseSize() {
+export function chooseSize(size) {
   return {
-    type: CHOOSE_SHIRTSIZE
+    type: CHOOSE_SHIRTSIZE,
+    size: size
   };
 }
 

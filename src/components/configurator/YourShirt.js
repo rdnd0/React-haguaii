@@ -1,73 +1,93 @@
-import React, { Component } from 'react'
-import ChooseSize from './ChooseSize';
+import React, { Component } from "react";
+import ChooseSize from "./ChooseSize";
+
+//Redux magic
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { increaseStage } from "../../redux/stage/actions";
+import { chooseSize } from "../../redux/shirt/actions";
 
 class YourShirt extends Component {
-
-  state ={
-    shirtSize: "",
-    shirtImage: this.props.sendShirtURL,
-  }
-
-  handleSize = (size) => {
-    this.setState({
-      shirtSize: size.value,
-    })
-  }
+  state = {
+    mainShirt: true
+  };
+  handleSize = size => {
+    const { chooseSize } = this.props;
+    console.log("handlesize", size.value);
+    size && chooseSize(size.value);
+  };
 
   toCheckOut = () => {
-    if(this.state.shirtSize !== "") {
-      this.props.passSize(this.state.shirtSize);
-      this.props.moveStage();
+    if (this.props.shirtSize !== "") {
+      this.props.increaseStage();
     }
-  }
+  };
 
   handleChamiseImg = () => {
-    const {sendShirtURL} = this.props;
     this.setState({
-      shirtImage: sendShirtURL,
-    })
-  }
+      mainShirt: true
+    });
+  };
 
   handleChamiseImg2 = () => {
-    const {sendShirtURL2} = this.props;
     this.setState({
-      shirtImage: sendShirtURL2,
-    })
-  }
+      mainShirt: false
+    });
+  };
 
   printShirt = () => {
-    let {shirtImage} = this.state
+    const { shirt1, shirt2 } = this.props;
+    const { mainShirt } = this.state;
 
     return (
-        <div className="shirt">
-          <div className="shirt-image">
-            <img src={shirtImage} alt="your-shirt" className="theshirt"/>
-            <div className="img-btns">
-              <button onClick={this.handleChamiseImg}></button>
-              <button onClick={this.handleChamiseImg2}></button>
-            </div>  
+      <div className="shirt">
+        <div className="shirt-image">
+          <img
+            src={mainShirt ? shirt1 : shirt2}
+            alt="your-shirt"
+            className="theshirt"
+          />
+          <div className="img-btns">
+            <button onClick={this.handleChamiseImg} />
+            <button onClick={this.handleChamiseImg2} />
           </div>
-          <div className="shirtDetails">
-            <p>100% silky persian cotton</p>
-            {this.state.shirtSize === '' && <h4>choose your size</h4>}
-            <ChooseSize onChange={this.handleSize} />
-            <p>Highly reliable product</p>          
-            <button className="purchase-btn" onClick={this.toCheckOut}>To checkout!</button>
-            <button className="back-btn" onClick={this.props.restart}>Back</button>
-          </div>
-        </div>)
-
-  }
-  render() {
-    return (
-      <div>
-        {this.printShirt()}
+        </div>
+        <div className="shirtDetails">
+          <p>100% silky persian cotton</p>
+          {this.props.shirtSize === "" && <h4>choose your size</h4>}
+          <ChooseSize onChange={this.handleSize} />
+          <p>Highly reliable product</p>
+          <button className="purchase-btn" onClick={this.toCheckOut}>
+            To checkout!
+          </button>
+          <button className="back-btn" onClick={this.props.restart}>
+            Back
+          </button>
+        </div>
       </div>
-    )
+    );
+  };
+  render() {
+    return <div>{this.printShirt()}</div>;
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      increaseStage,
+      chooseSize
+    },
+    dispatch
+  );
 
-export default YourShirt;
+const mapStateToProps = state => ({
+  shirt1: state.shirt.path1,
+  shirt2: state.shirt.path2,
+  shirtSize: state.shirt.size
+});
 
-
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(YourShirt);

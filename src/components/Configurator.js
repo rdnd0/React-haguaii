@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withAuth } from "../components/AuthProvider";
 import { withRouter } from "react-router-dom";
+
 //Redux magic
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -13,45 +14,6 @@ import YourShirt from "../components/configurator/YourShirt";
 import Purchase from "../components/configurator/Purchase";
 
 class Configurator extends Component {
-  // state = {
-  //   stage: 0,
-  //   elements: 0,
-  //   shirtURL: "",
-  //   shirtURL2: "",
-  //   shirtSize: ""
-  // };
-
-  //will not need it as I will be pulling info from store
-  // componentDidMount() {
-  //   if (localStorage.getItem("shirtURL")) {
-  //     this.setState(
-  //       {
-  //         stage: 3,
-  //         shirtURL: localStorage.getItem("shirtURL"),
-  //         shirtSize: localStorage.getItem("shirtSize")
-  //       },
-  //       () => {
-  //         localStorage.removeItem("shirtURL");
-  //         localStorage.removeItem("shirtSize");
-  //       }
-  //     );
-  //   }
-  // }
-  // store will take care of this with actions
-  // handleIncrement = () => {
-  //   const { stage } = this.state;
-  //   this.setState({
-  //     stage: stage + 1
-  //   });
-  // };
-
-  // handleDecrement = () => {
-  //   const { stage } = this.state;
-  //   this.setState({
-  //     stage: stage - 1
-  //   });
-  // };
-
   //Random
   handleRandom = () => {
     this.setState({
@@ -61,74 +23,17 @@ class Configurator extends Component {
     });
   };
 
-  passShirtURLR = (shirt1, shirt2) => {
-    this.setState({
-      shirtURL: shirt1,
-      shirtURL2: shirt2
-    });
-  };
-
-  //Elements selector
-  passNumberOfElements = elements => {
-    this.setState({
-      elements
-    });
-  };
-
-  //Cards
-  passShirtURL = (shirt1, shirt2) => {
-    this.setState({
-      shirtURL: shirt1,
-      shirtURL2: shirt2
-    });
-  };
-
-  //Shirts
-  passSize = size => {
-    this.setState({
-      shirtSize: size
-    });
-  };
-
-  //Purchase
-
   renderSelected = () => {
     let { stage } = this.props;
     switch (stage) {
       case 0:
-        return (
-          <NumberOfElements
-            moveStage={this.handleIncrement}
-            passNumberOfElements={this.passNumberOfElements}
-            moveStageR={this.handleRandom}
-          />
-        );
+        return <NumberOfElements moveStageR={this.handleRandom} />;
       case 1:
-        return (
-          <Cards
-            numberOfElements={this.state.elements}
-            moveStage={this.handleIncrement}
-            passShirtURL={this.passShirtURL}
-          />
-        );
+        return <Cards />;
       case 2:
-        return (
-          <YourShirt
-            sendShirtURL={this.state.shirtURL}
-            sendShirtURL2={this.state.shirtURL2}
-            moveStage={this.handleIncrement}
-            restart={this.restart}
-            passSize={this.passSize}
-          />
-        );
+        return <YourShirt />;
       case 3:
-        return (
-          <Purchase
-            shirtURL={this.state.shirtURL}
-            shirtSize={this.state.shirtSize}
-            restart={this.restart}
-          />
-        );
+        return <Purchase />;
       default:
         return null;
     }

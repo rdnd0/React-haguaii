@@ -6,13 +6,13 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  const { type, data } = action;
+  const { type, illustrations } = action;
 
   switch (type) {
     case GET_ILLUSTRATIONS:
       return {
         ...state,
-        illustrations: data,
+        illustrations,
         illustrationsLoaded: true
       };
     default:
