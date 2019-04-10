@@ -36,6 +36,7 @@ class NumberOfElements extends Component {
   };
 
   goRandom = () => {
+    console.log("going random");
     this.props.moveStageR();
   };
 

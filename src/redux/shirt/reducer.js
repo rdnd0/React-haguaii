@@ -32,7 +32,10 @@ export default function(state = initialState, action) {
     case RESET_SHIRT:
       return {
         ...state,
-        elements: 0
+        elements: 0,
+        path1: "",
+        path2: "",
+        size: ""
       };
 
     case CHOOSE_SHIRTURL:

@@ -344,7 +344,6 @@ header p {
 .cards-app {
   width: 100vw;
   margin: 7rem auto;
-  height: calc(100vh - 68.6px);
 }
 
 .cards-tittle {

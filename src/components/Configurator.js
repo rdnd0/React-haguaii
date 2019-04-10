@@ -5,7 +5,8 @@ import { withRouter } from "react-router-dom";
 //Redux magic
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { resetStage } from "../redux/stage/actions";
+import { resetStage, randomStage } from "../redux/stage/actions";
+import { resetShirt, chooseShirt } from "../redux/shirt/actions";
 
 //Components
 import NumberOfElements from "../components/configurator/NumberOfElements";
@@ -16,11 +17,18 @@ import Purchase from "../components/configurator/Purchase";
 class Configurator extends Component {
   //Random
   handleRandom = () => {
-    this.setState({
-      stage: 2,
-      shirtURL: "http://localhost:5000/images/shirt-brocolipizza.png",
-      shirtURL2: "http://localhost:5000/images/shirt-brocolipizza2.png"
-    });
+    const { randomStage, chooseShirt } = this.props;
+
+    let shirtURL = "http://localhost:5000/images/shirt-brocolipizza.png";
+    let shirtURL2 = "http://localhost:5000/images/shirt-brocolipizza2.png";
+    randomStage();
+    chooseShirt(shirtURL, shirtURL2);
+  };
+
+  restart = () => {
+    const { resetStage, resetShirt } = this.props;
+    resetStage();
+    resetShirt();
   };
 
   renderSelected = () => {
@@ -31,22 +39,13 @@ class Configurator extends Component {
       case 1:
         return <Cards />;
       case 2:
-        return <YourShirt />;
+        return <YourShirt restart={this.restart} />;
       case 3:
-        return <Purchase />;
+        return <Purchase restart={this.restart} />;
       default:
         return null;
     }
   };
-
-  // restart = () => {
-  //   this.setState({
-  //     stage: 0,
-  //     elements: 0,
-  //     shirtURL: "",
-  //     shirtSize: ""
-  //   });
-  // };
 
   render() {
     return (
@@ -65,7 +64,10 @@ class Configurator extends Component {
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      resetStage
+      resetStage,
+      resetShirt,
+      randomStage,
+      chooseShirt
     },
     dispatch
   );

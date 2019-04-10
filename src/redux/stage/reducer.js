@@ -1,4 +1,9 @@
-import { DECREASE_STAGE, INCREASE_STAGE, RESET_STAGE } from "./actions";
+import {
+  DECREASE_STAGE,
+  INCREASE_STAGE,
+  RESET_STAGE,
+  RANDOM_STAGE
+} from "./actions";
 
 const initialState = {
   stage: 0
@@ -22,6 +27,11 @@ export default function(state = initialState, action) {
       return {
         ...state,
         stage: 0
+      };
+    case RANDOM_STAGE:
+      return {
+        ...state,
+        stage: 2
       };
     default:
       return state;
