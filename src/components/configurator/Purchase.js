@@ -1,71 +1,98 @@
-import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import Api from '../../lib/shirts-service';
-import { withAuth } from '../../components/AuthProvider';
+import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import Api from "../../lib/shirts-service";
+import { withAuth } from "../../components/AuthProvider";
+
+//Redux magic
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { increaseStage } from "../../redux/stage/actions";
+import { chooseSize } from "../../redux/shirt/actions";
 
 class Purchase extends Component {
   state = {
-    redirect: false,
-  }
+    redirect: false
+  };
 
   purchase = () => {
-    const {shirtURL, shirtSize} = this.props;
+    const { shirt1, shirtSize } = this.props;
     const user = this.props.user._id;
 
-    Api.createShirt({ user, shirtURL, shirtSize })
-    .then((result) => {
-      localStorage.removeItem('shirtURL');
-      localStorage.removeItem('shirtSize');
-      this.setState({
-        redirect: true,
+    Api.createShirt({ user, shirt1, shirtSize })
+      .then(result => {
+        console.log("shirt created: ", result);
+        this.setState({
+          redirect: true
+        });
       })
-    })
-    .catch((error) => {console.log(error)})
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   printPurchaseScreen = () => {
-    localStorage.setItem('shirtURL', this.props.shirtURL);
-    localStorage.setItem('shirtSize', this.props.shirtSize);
-    const {shirtURL, shirtSize} = this.props;
+    const { shirt1, shirtSize } = this.props;
     const user = this.props.user._id;
 
     if (user) {
-      return(
+      return (
         <div className="purchase-screen">
-            <h1>Shopping cart</h1>
+          <h1>Shopping cart</h1>
           <div className="purchase">
-            <img src={shirtURL} alt="shirt" className="purchase-shirt"/>
+            <img src={shirt1} alt="shirt" className="purchase-shirt" />
             <div className="purchase-details">
-              <h3>{ `Your size: ${shirtSize}` }</h3>
-              <h3 className="price-tag">Price: 75€</h3>
-              <button className="purchase-btn" onClick={this.purchase}>Buy!</button>
-              <button className="back-btn" onClick={this.props.restart}>Back</button>
+              <h3>{`Your size: ${shirtSize}`}</h3>
+              <button className="purchase-btn" onClick={this.purchase}>
+                Buy!
+              </button>
+              <button className="back-btn" onClick={this.props.restart}>
+                Back
+              </button>
             </div>
           </div>
-        </div>)
+        </div>
+      );
     } else {
-      return <Redirect to={{ 
-        pathname: '/signup', 
-      }} />
-      
+      return (
+        <Redirect
+          to={{
+            pathname: "/signup"
+          }}
+        />
+      );
     }
-
-  }
+  };
   render() {
-    if(this.state.redirect) {
-      return(
-        <Redirect to={{ 
-          pathname: '/Private', 
-        }} />
-      )
+    if (this.state.redirect) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/Private"
+          }}
+        />
+      );
     }
-    return (
-      <div>
-        {this.printPurchaseScreen()}
-      </div>
-    )
+    return <div>{this.printPurchaseScreen()}</div>;
   }
 }
 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      increaseStage,
+      chooseSize
+    },
+    dispatch
+  );
 
-export default withAuth(Purchase);
+const mapStateToProps = state => ({
+  shirt1: state.shirt.path1,
+  shirtSize: state.shirt.size
+});
+
+export default withAuth(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Purchase)
+);
