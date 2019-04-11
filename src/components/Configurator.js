@@ -22,8 +22,12 @@ class Configurator extends Component {
   handleRandom = () => {
     const { randomStage, chooseShirt } = this.props;
 
-    let shirtURL = "http://localhost:5000/images/shirt-brocolipizza.png";
-    let shirtURL2 = "http://localhost:5000/images/shirt-brocolipizza2.png";
+    let shirtURL = `${
+      process.env.REACT_APP_BASE_URL
+    }/images/shirt-brocolipizza.png`;
+    let shirtURL2 = `${
+      process.env.REACT_APP_BASE_URL
+    }/images/shirt-brocolipizza2.png`;
     randomStage();
     chooseShirt(shirtURL, shirtURL2);
   };
